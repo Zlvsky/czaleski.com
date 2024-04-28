@@ -1,6 +1,8 @@
 'use client'
 import { motion } from 'framer-motion'
+import Connect from './_components/Connect'
 import Logo from './_components/Logo'
+import ModeToggle from './_components/ModeToggle'
 import NavLinks from './_components/NavLinks'
 
 function Header() {
@@ -12,11 +14,19 @@ function Header() {
         visible: { opacity: 1, y: 0 },
         hidden: { opacity: 0, y: -100 }
       }}
-      className="top-4 z-20 mx-auto my-4 mb-20 flex w-full max-w-2xl items-center justify-between rounded-2xl py-1"
+      className="top-4 z-20 mx-auto my-4 mb-14 flex w-full max-w-[40rem] flex-col  rounded-2xl py-1"
     >
-      <Logo />
-      <NavLinks />
-      {/* <Connect /> */}
+      <div className="flex flex-row items-center justify-between ">
+        <Logo />
+        <NavLinks />
+        {/* <Connect /> */}
+      </div>
+
+      <div className="flex flex-row items-center justify-between">
+        {/* <NavLinks /> */}
+        <Connect />
+        <ModeToggle />
+      </div>
     </motion.div>
   )
 }

@@ -35,7 +35,7 @@ const PingDot = () => {
 const ConnectButton = () => (
   <a
     href="mailto:zlvsky@icloud.com"
-    className="bg-primary rounded-md px-1 py-2 text-white"
+    className="rounded-md bg-primary px-1 py-2 text-white"
   >
     <button className="flex flex-row items-center rounded-xl border border-grayE8 bg-white/50 px-4 py-3 transition-colors ease-in hover:bg-grayE8/40">
       <PingDot />
@@ -47,7 +47,11 @@ const ConnectButton = () => (
 function Connect() {
   return (
     <div className="flex w-full items-center justify-between gap-4 md:w-auto md:justify-end">
-      <Socials />
+      {/* <Socials /> */}
+      <a className="text-sm tracking-tighter underline">twitter</a>
+      <a className="text-sm tracking-tighter underline">github</a>
+      <a className="text-sm tracking-tighter underline">linkedin</a>
+      <a className="text-sm tracking-tighter underline">gumroad</a>
       {/* <ConnectButton /> */}
     </div>
   )

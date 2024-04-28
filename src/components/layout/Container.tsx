@@ -6,7 +6,7 @@ interface IProps extends IChildren {
 
 export default function Container({ children, id }: IProps) {
   return (
-    <main id={id} className="mx-auto flex h-full w-full max-w-2xl flex-col">
+    <main id={id} className="mx-auto flex h-full w-full max-w-[40rem] flex-col">
       {children}
     </main>
   )
