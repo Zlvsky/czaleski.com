@@ -1,8 +1,10 @@
+import SectionHeader from '../ui/SectionHeader'
+
 function Hero() {
   return (
     <div className="flex flex-col md:flex-row">
       <div className="md:w-4/5">
-        <h1 className="text-sm font-medium text-[#545454]">Ohayo 👋</h1>
+        <SectionHeader>Ohayo 👋</SectionHeader>
         <p className="mb-4 text-gray40">
           I&apos;m a web & frontend developer, proficient in React ecosystem. Seamlessly
           transitioning from crafting websites to developing web applications.
