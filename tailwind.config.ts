@@ -22,12 +22,12 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       },
       colors: {
-        accent: "hsl(var(--accent))",
-        'accent-foreground': "hsl(var(--accent-foreground))",
-        primary: "hsl(var(--primary))",
-        'primary-foreground': "hsl(var(--primary-foreground))",
-        muted: "hsl(var(--muted))",
-        'muted-foreground': "hsl(var(--muted-foreground))",
+        accent: 'hsl(var(--accent))',
+        'accent-foreground': 'hsl(var(--accent-foreground))',
+        primary: 'hsl(var(--primary))',
+        'primary-foreground': 'hsl(var(--primary-foreground))',
+        muted: 'hsl(var(--muted))',
+        'muted-foreground': 'hsl(var(--muted-foreground))',
         dark: '#1c1d1f',
         gray40: '#404040',
         gray2: '#606060',
