@@ -26,6 +26,12 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
+        {/* <div id="goodsoft-feedback-widget"></div>
+        <link
+          href="https://rawcdn.githack.com/goodsoftpl/widget/b9691966b7bfbec7871b64c179ef653e9842c633/main.css"
+          rel="stylesheet"
+        />
+        <Script src="https://rawcdn.githack.com/goodsoftpl/widget/b9691966b7bfbec7871b64c179ef653e9842c633/main.js"></Script> */}
       </body>
     </html>
   )

@@ -16,6 +16,29 @@ const PingDot = () => {
   )
 }
 
+const LocalTime = () => {
+  const [localTime, setLocalTime] = useState<string>('')
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date()
+      const options = {
+        hour: 'numeric' as const,
+        minute: 'numeric' as const,
+        hour12: true,
+        timeZone: 'Europe/Warsaw'
+      }
+      const formatter = new Intl.DateTimeFormat('en-US', options)
+      const formattedTime = formatter.format(now)
+      setLocalTime(formattedTime)
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
+  return <span className="text-sm text-[#555]">Poland, local time: {localTime}</span>
+}
+
 function Contact() {
   const [type, setType] = useState<null | 'email' | 'copy'>(null)
   const timeout = useRef<any>(null)
@@ -72,6 +95,7 @@ function Contact() {
           )}
         </div>
       </div>
+      <LocalTime />
     </div>
   )
 }

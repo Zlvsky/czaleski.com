@@ -1,7 +1,9 @@
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
+import BigWrap from '@/components/layout/BigWrap'
 import Container from '@/components/layout/Container'
 import PageWrap from '@/components/layout/PageWrap'
+import SmallWrap from '@/components/layout/SmallWrap'
 import Contact from '@/components/main-page/Contact'
 import Experience from '@/components/main-page/Experience'
 import Hero from '@/components/main-page/Hero'
@@ -12,12 +14,16 @@ export default function Home() {
   return (
     <PageWrap>
       <Header />
-      <Container id="main">
-        <Hero />
-        <Contact />
-        <Skills />
-        <Experience />
-        <Projects />
+      <Container>
+        <SmallWrap id="main">
+          <Hero />
+          <Contact />
+          <Skills />
+          <Experience />
+        </SmallWrap>
+        <BigWrap id="work">
+          <Projects />
+        </BigWrap>
       </Container>
       <Footer />
     </PageWrap>

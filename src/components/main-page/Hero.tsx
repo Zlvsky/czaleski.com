@@ -1,13 +1,32 @@
+import hand from '@/assets/images/hand.png'
+import profile from '@/assets/images/profile.png'
+import Image from 'next/image'
 import SectionHeader from '../ui/SectionHeader'
 
 function Hero() {
   return (
     <div className="flex flex-col  md:flex-row">
-      <div className="w-4/5">
-        <SectionHeader>Some words about me 👋</SectionHeader>
+      <div className="">
+        <SectionHeader>
+          <div className="flex flex-row items-center gap-2">
+            <Image
+              width={150}
+              height={150}
+              className="h-12 w-12  rounded-xl border  bg-gradient-to-b from-[#D7D7D7] to-[#FEFEFE] drop-shadow-xl "
+              src={profile.src}
+              alt=""
+            />
+            <span className="flex flex-row items-center gap-1 text-xl font-normal tracking-tight">
+              Hey <Image src={hand} height={24} width={24} alt="👋" /> I&apos;m Krzysztof,
+              but you can call me Chris
+            </span>
+          </div>
+        </SectionHeader>
+        <h1 className="mb-4 text-3xl font-normal tracking-tight">
+          Web & frontend developer, proficient in React ecosystem.
+        </h1>
         <p className="mb-4 text-[#555] dark:text-white">
-          I&apos;m a web & frontend developer, proficient in React ecosystem. Seamlessly
-          transitioning from crafting websites to developing web applications.
+          Seamlessly transitioning from crafting websites to developing web applications.
         </p>
         <p className="mb-4 text-[#555] dark:text-white">
           Passionate about creative solutions and building apps from scratch, perfecting

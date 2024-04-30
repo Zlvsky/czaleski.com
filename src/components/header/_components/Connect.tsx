@@ -4,12 +4,12 @@ import TwitterSVG from '@/assets/icons/social/twitter.svg'
 
 const Socials = () => {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2">
       <a href="https://twitter.com/Zlvskyy" target="_blank" rel="noreferrer">
-        <TwitterSVG width={20} height={20} />
+        <TwitterSVG width={16} height={16} />
       </a>
       <a href="https://github.com/Zlvsky" target="_blank" rel="noreferrer">
-        <GithubSVG width={20} height={20} />
+        <GithubSVG width={16} height={16} />
       </a>
 
       <a
@@ -17,7 +17,7 @@ const Socials = () => {
         target="_blank"
         rel="noreferrer"
       >
-        <LinkedInSVG width={20} height={20} />
+        <LinkedInSVG width={16} height={16} />
       </a>
     </div>
   )
@@ -47,11 +47,11 @@ const ConnectButton = () => (
 function Connect() {
   return (
     <div className="flex w-full items-center justify-between gap-4 md:w-auto md:justify-end">
-      {/* <Socials /> */}
-      <a className="text-sm tracking-tighter underline">twitter</a>
+      <Socials />
+      {/* <a className="text-sm tracking-tighter underline">twitter</a>
       <a className="text-sm tracking-tighter underline">github</a>
       <a className="text-sm tracking-tighter underline">linkedin</a>
-      <a className="text-sm tracking-tighter underline">gumroad</a>
+      <a className="text-sm tracking-tighter underline">gumroad</a> */}
       {/* <ConnectButton /> */}
     </div>
   )
