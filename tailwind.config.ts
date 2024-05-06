@@ -43,7 +43,8 @@ const config: Config = {
       },
       boxShadow: {
         block: '0px 0px 30px 1px rgba(0, 0, 0, 0.05)',
-        project: '0px 8px 16px 0px rgba(3, 7, 18, 0.08), 0px 0px 0px 1px rgba(3, 7, 18, 0.08)'
+        project:
+          '0px 8px 16px 0px rgba(3, 7, 18, 0.08), 0px 0px 0px 1px rgba(3, 7, 18, 0.08)'
       }
     }
   },

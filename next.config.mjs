@@ -7,16 +7,6 @@ const nextConfig = {
     })
 
     return config
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'vijaysaiwal.in',
-        port: '',
-        pathname: '/**',
-      },
-    ]
   }
 }
 
