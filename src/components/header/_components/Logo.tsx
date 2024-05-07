@@ -1,6 +1,6 @@
 function Logo() {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="hidden items-center space-x-2 sm:flex">
       <div className="flex flex-col text-sm leading-none">
         <span className="text-lg font-bold tracking-tighter dark:text-white">
           Krzysztof Zaleski

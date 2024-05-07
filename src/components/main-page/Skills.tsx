@@ -93,31 +93,31 @@ function Skills() {
   return (
     <div className="mt-8">
       <SectionHeader>Skills</SectionHeader>
-      <div className="mb-2 flex flex-row">
+      <div className="mb-2 flex flex-row ">
         {/* <div className="w-1/5">
           <span className="text-sm text-[#999]">frontend:</span>
         </div> */}
-        <div className="flex w-4/5 flex-row items-center gap-2">
+        <div className="flex flex-row flex-wrap items-center gap-2">
           {data.frontend.map((tech, index) => (
             <SingleTech key={index} {...tech} />
           ))}
         </div>
       </div>
-      <div className="mb-2 flex flex-row">
+      <div className="mb-2 flex flex-row ">
         {/* <div className="w-1/5">
           <span className="text-sm text-[#999]">backend:</span>
         </div> */}
-        <div className="flex w-4/5 flex-row items-center gap-2">
+        <div className="flex  flex-row flex-wrap items-center gap-2">
           {data.backend.map((tech, index) => (
             <SingleTech key={index} {...tech} />
           ))}
         </div>
       </div>
-      <div className="mb-2 flex flex-row">
+      <div className="mb-2 flex flex-row ">
         {/* <div className="w-1/5">
           <span className="text-sm text-[#999]">backend:</span>
         </div> */}
-        <div className="flex w-4/5 flex-row items-center gap-2">
+        <div className="flex flex-row flex-wrap items-center gap-2">
           {data.tools.map((tech, index) => (
             <SingleTech key={index} {...tech} />
           ))}

@@ -7,7 +7,7 @@ interface IProps extends IChildren {
 }
 
 const PageWrap = memo(({ children, isGradient }: IProps) => {
-  return <div className={`flex min-h-screen flex-col py-8`}>{children}</div>
+  return <div className={`flex min-h-screen flex-col px-3 py-8 md:px-0`}>{children}</div>
 })
 
 PageWrap.displayName = 'PageWrap'

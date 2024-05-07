@@ -8,7 +8,7 @@ function Hero() {
     <div className="flex flex-col  md:flex-row">
       <div className="">
         <SectionHeader>
-          <div className="flex flex-row items-center gap-2">
+          <div className="flex flex-row flex-wrap items-center gap-2">
             <Image
               width={150}
               height={150}
@@ -17,24 +17,35 @@ function Hero() {
               alt=""
             />
             <span className="flex flex-row items-center gap-1 text-xl font-normal tracking-tight">
-              Hey <Image src={hand} height={24} width={24} alt="👋" /> I&apos;m Krzysztof,
-              but you can call me Chris
+              {' '}
+              Hey <Image src={hand} height={24} width={24} alt="👋" />{' '}
+            </span>
+            <span className="flex flex-row items-center gap-1 text-xl font-normal tracking-tight">
+              I&apos;m Krzysztof, but you can call me Chris
             </span>
           </div>
         </SectionHeader>
         <h1 className="mb-4 text-3xl font-normal tracking-tight">
           Web & frontend developer, proficient in React ecosystem.
         </h1>
-        <p className="mb-4 text-[#555] dark:text-white">
+        <p className="mb-4 text-[#555] dark:text-[#a8a8a8]">
           Seamlessly transitioning from crafting websites to developing web applications.
         </p>
-        <p className="mb-4 text-[#555] dark:text-white">
+        <p className="mb-4 text-[#555] dark:text-[#a8a8a8]">
           Passionate about creative solutions and building apps from scratch, perfecting
           both backend and frontend.
         </p>
-        <p className="text-[#555] dark:text-white">
-          Currently working as a sole frontend developer, freelancing from time-to-time
-          and building my own products.
+        <p className="text-[#555] dark:text-[#a8a8a8]">
+          Currently working as a sole frontend developer,{' '}
+          <a
+            className="font-medium text-black underline dark:text-white"
+            href="https://hireme.czaleski.com"
+            target="_blank"
+          >
+            {' '}
+            freelancing
+          </a>{' '}
+          from time-to-time and building my own products.
         </p>
       </div>
     </div>

@@ -20,7 +20,7 @@ const data = [
 
 const SingleExperience = ({ role, company, date }: (typeof data)[0]) => {
   return (
-    <div className="flex flex-row items-center py-2 text-sm text-[#555]">
+    <div className="flex flex-row items-center py-2 text-sm text-[#555] dark:text-[#a8a8a8]">
       <span className="w-1/4 text-left">{date}</span>
       <span className="font-medium">{role} </span>
       <span className="ml-1">@ {company}</span>

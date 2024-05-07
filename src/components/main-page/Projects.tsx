@@ -69,12 +69,12 @@ const data = [
       'Custom-made bot that automates the insertion of offers on a IT freelancing portal',
     year: '2021',
     image: work7
-  },
-  {
-    name: 'ZSEClicker',
-    shortDescription: 'Game based on idle mechanics, inspired by Cookie Clicker.',
-    year: '2018'
   }
+  // {
+  //   name: 'ZSEClicker',
+  //   shortDescription: 'Game based on idle mechanics, inspired by Cookie Clicker.',
+  //   year: '2018'
+  // }
 ]
 
 const SingleProject = ({
@@ -87,11 +87,12 @@ const SingleProject = ({
 }: (typeof data)[0]) => {
   return (
     <motion.div layoutId={name} className="flex flex-col gap-8">
-      <div className="group relative min-h-40 w-full cursor-pointer overflow-hidden rounded-xl p-1 shadow-project">
-        <Button className="absolute left-1/2 z-10 -translate-x-1/2 -translate-y-10 border bg-black text-white transition-transform group-hover:-translate-y-2">
-          Read more
-        </Button>
-        {image && (
+      {image && (
+        <div className="group relative min-h-40 w-full cursor-pointer overflow-hidden rounded-xl p-1 shadow-project dark:border dark:border-dark48">
+          <Button className="absolute left-1/2 z-10 -translate-x-1/2 -translate-y-10 border bg-black text-white transition-transform group-hover:-translate-y-2 dark:bg-white dark:text-black">
+            Read more
+          </Button>
+
           <Image
             src={image}
             width={672}
@@ -99,13 +100,13 @@ const SingleProject = ({
             alt=""
             className="scale h-full rounded-md transition-transform group-hover:translate-y-10"
           />
-        )}
-      </div>
-      <div className="flex flex-col justify-between pr-4 md:flex-row">
-        <p className="text-[#555] md:w-3/5">{shortDescription}</p>
-        <div className="items-end text-right md:w-2/5">
+        </div>
+      )}
+      <div className="flex flex-col justify-between pr-4 sm:flex-row">
+        <p className="text-[#555] dark:text-[#a8a8a8] sm:w-3/5">{shortDescription}</p>
+        <div className="items-end text-right sm:w-2/5">
           <div className="flex flex-col justify-end">
-            <span className="text-sm text-[#777]">{year}</span>
+            <span className="text-sm text-[#777] dark:text-[#a8a8a8]">{year}</span>
             <h4 className="text-lg font-semibold tracking-tighter">{name}</h4>
             <div className="flex flex-row items-center justify-end gap-1">
               {live && (
@@ -125,7 +126,7 @@ const SingleProject = ({
                   rel="noreferrer"
                   className="flex items-center gap-1"
                 >
-                  <GithubSvg className="h-4 w-4" />
+                  <GithubSvg className="h-4 w-4 dark:[&>path]:fill-white" />
                 </a>
               )}
             </div>
@@ -143,7 +144,7 @@ function Projects() {
     <>
       <div className="mt-8">
         {/* <SectionHeader>Projects</SectionHeader> */}
-        <div className="flex flex-col gap-14">
+        <div className="flex flex-col gap-16">
           {data.map((el, index) => (
             <SingleProject {...el} key={'project_' + index} />
           ))}

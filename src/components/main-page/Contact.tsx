@@ -36,7 +36,11 @@ const LocalTime = () => {
     return () => clearInterval(interval)
   }, [])
 
-  return <span className="text-sm text-[#555]">Poland, local time: {localTime}</span>
+  return (
+    <span className="text-sm text-[#555] dark:text-[#a8a8a8]">
+      Poland, local time: {localTime}
+    </span>
+  )
 }
 
 function Contact() {
@@ -64,27 +68,27 @@ function Contact() {
 
   return (
     <div className="mt-8 flex flex-col gap-2">
-      <h3 className="flex flex-row items-center gap-1 text-sm text-[#555]">
+      <h3 className="flex flex-row items-center gap-1 text-sm text-[#555] dark:text-[#a8a8a8]">
         <PingDot /> Available for new challanges.
       </h3>
       <div className="flex flex-row items-center gap-3">
         <a
           href="mailto:zlvsky@icloud.com"
-          className="border-input cursor-pointer rounded-md border p-2.5 transition-colors ease-linear hover:bg-accent active:scale-95"
+          className="border-input cursor-pointer rounded-md border border-black p-2.5 transition-colors ease-linear hover:bg-accent active:scale-95 dark:border-dark48"
           onMouseEnter={() => handleSetType('email')}
           onMouseLeave={handleClearType}
         >
           <MailSvg className="h-4 w-4" />
         </a>
         <div
-          className="border-input cursor-pointer rounded-md border p-2.5 transition-colors ease-linear hover:bg-accent active:scale-95"
+          className="border-input cursor-pointer rounded-md border border-black p-2.5 transition-colors ease-linear hover:bg-accent active:scale-95 dark:border-dark48"
           onMouseEnter={() => handleSetType('copy')}
           onMouseLeave={handleClearType}
           onClick={copy}
         >
           {isCopied ? <CheckSvg className="h-4 w-4" /> : <CopySvg className="h-4 w-4" />}
         </div>
-        <div className="flex flex-col text-sm text-[#555]">
+        <div className="flex flex-col text-sm text-[#555] dark:text-[#a8a8a8]">
           <span>Feel free to reach me out</span>
           {type === null ? (
             <span>Send me an email</span>

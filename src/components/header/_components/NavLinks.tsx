@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 interface ISingleLink {
   href: string
   text: string
@@ -5,41 +7,51 @@ interface ISingleLink {
 
 const ahrefs = [
   {
-    href: 'https://drive.google.com/file/d/1qIPu8SZ8ihFguJIER_0vAFMAAvaN6JPJ/view',
+    href: '/about',
     text: 'About'
   },
   {
-    href: 'https://drive.google.com/file/d/1qIPu8SZ8ihFguJIER_0vAFMAAvaN6JPJ/view',
+    href: '/work',
+    text: 'Work'
+  },
+  {
+    href: '/blog',
     text: 'Blog'
   },
   {
-    href: 'https://drive.google.com/file/d/1qIPu8SZ8ihFguJIER_0vAFMAAvaN6JPJ/view',
-    text: 'Resume'
-  },
-  {
-    href: 'https://czaleski.gumroad.com/',
-    text: 'Gumroad'
+    href: 'https://products.czaleski.com/',
+    text: 'Products'
   }
 ]
 
 const SingleLink: React.FC<ISingleLink> = ({ href, text }) => {
+  if (href.startsWith('http')) {
+    return (
+      <a
+        href={href}
+        className="text-sm text-gray2 dark:text-white/90"
+        target="_blank"
+        referrerPolicy="no-referrer"
+      >
+        <li className="cursor-pointer rounded-md bg-transparent px-1 py-1.5 transition-colors ease-in hover:bg-grayE8/40 dark:hover:bg-dark26 sm:px-2">
+          {text}
+        </li>
+      </a>
+    )
+  }
+
   return (
-    <a
-      href={href}
-      className="text-sm text-gray2"
-      target="_blank"
-      referrerPolicy="no-referrer"
-    >
-      <li className="cursor-pointer rounded-md bg-transparent px-2 py-1.5 transition-colors ease-in hover:bg-grayE8/40">
+    <Link href={href} className="text-sm text-gray2 dark:text-white/90">
+      <li className="cursor-pointer rounded-md bg-transparent px-2 py-1.5 transition-colors ease-in hover:bg-grayE8/40 dark:hover:bg-dark26">
         {text}
       </li>
-    </a>
+    </Link>
   )
 }
 
 const NavLinks = () => {
   return (
-    <ul className="hidden flex-row items-center gap-2 lg:flex">
+    <ul className="flex flex-row items-center gap-1 sm:gap-2">
       {ahrefs.map((link, index) => (
         <SingleLink key={index} {...link} />
       ))}
