@@ -11,12 +11,14 @@ interface IProps {
 function ArticlePreview({ title, description, slug, category, readTime }: IProps) {
   return (
     <li className="">
-      <Link href={slug}>
+      <Link href={`/blog/${slug}`}>
         <article>
-          <h2>{title}</h2>
-          <p>{description}</p>
-          <div className="flex flex-row items-center gap-3">
-            <span>{category}</span>•<span>{readTime}</span>
+          <h2 className="mb-2 text-base font-medium text-[#111] dark:text-white">
+            {title}
+          </h2>
+          <p className="text-[#555] dark:text-[#a8a8a8]">{description}</p>
+          <div className="mt-2 flex flex-row items-center gap-1 text-sm text-[#555] dark:text-[#a8a8a8]">
+            <span>{category}</span>•<span>{Math.round(readTime)} minutes</span>
           </div>
         </article>
       </Link>
