@@ -39,7 +39,8 @@ const config: Config = {
         dark30: '#303030',
         darkbg: '#1F1F1F',
         darkborder: '#484848',
-        green: '#2CA56B'
+        green: '#2CA56B',
+        grayF9: '#F9F9F9'
       },
       boxShadow: {
         block: '0px 0px 30px 1px rgba(0, 0, 0, 0.05)',

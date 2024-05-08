@@ -34,3 +34,144 @@ body {
     text-wrap: balance;
   }
 }
+
+/* code mdx */
+
+.post-code {
+  @apply border;
+}
+
+pre {
+  @apply  text-base p-8 rounded-b-xl overflow-x-auto;
+}
+
+article :not(pre)>code {
+  @apply bg-muted text-black mx-1 px-1.5;
+}
+
+code {
+  
+}
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: rgb(99, 119, 119);
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: #ABB2BF;
+}
+
+.namespace {
+  color: rgb(178, 204, 214);
+}
+
+.token.deleted {
+  color: #E06C75;
+  font-style: italic;
+}
+
+.token.symbol,
+.token.property,
+.token.property-access {
+  color: #E06C75;
+}
+
+.token.tag,
+.token.operator,
+.token.keyword {
+  color: #C678DD;
+}
+
+.token.number, .token.boolean {
+  color: #D19A66;
+}
+
+.token.constant,
+.token.function,
+.token.builtin,
+.token.char {
+  color: #61AFEF;
+}
+
+.token.selector,
+.token.doctype {
+  color: #C678DD;
+  font-style: italic;
+}
+
+.token.attr-name,
+.token.inserted {
+  color: #E5C07B;
+  font-style: italic;
+}
+
+.token.string,
+.token.url,
+.token.entity,
+.language-css .token.string,
+.style .token.string {
+  color: #98C379;
+}
+
+.token.class-name,
+.token.atrule,
+.token.attr-value {
+  color: #E5C07B;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #D19A66;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* code mdx */
+
+
+@layer base {
+  
+
+  .article ul,
+  .article ol,
+  .article p {
+    list-style: revert;
+    margin: revert;
+    padding: revert;
+    letter-spacing: revert;
+    line-height: revert;
+  }
+  .clean-style table {
+    border-width: 1px;
+  }
+  .clean-style table > tbody, .clean-style table > tbody > tr, .clean-style table > tbody > tr > td  {
+    border-width: inherit;
+    border-color: inherit;
+  }
+  .clean-style h1, .clean-style h2, .clean-style h3, .clean-style h4, .clean-style h5, .clean-style h6 {
+    font-size: revert;
+    line-height: revert;
+    letter-spacing: revert;
+  }
+}
+
+
+article a {
+  @apply no-underline border-b-2 border-black cursor-pointer font-semibold;
+}
+
+.article div img {
+  max-height: 200px;
+  object-fit: contain;
+}

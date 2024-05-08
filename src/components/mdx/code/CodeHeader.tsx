@@ -14,7 +14,7 @@ type CodeHeaderProps = {
 
 export const CodeHeader = memo<CodeHeaderProps>(({ onCopy, isCopied, title, icon }) => {
   return (
-    <header className="bg-darkBg2 flex w-full flex-row items-center justify-between rounded-t-xl">
+    <header className="borber-b flex w-full flex-row items-center justify-between rounded-t-xl bg-muted">
       <div className="bg-secondary flex flex-row gap-1 rounded-tl-xl border-r border-black px-4 py-2">
         {icon && <Image src={icon} alt={title || ''} width={16} height={16} />}
         <p data-codetitle className="text-base">
