@@ -1,0 +1,284 @@
+---
+title: "React - Utrzymywanie sesji użytkownika za pomocą Redux'a i Cookies"
+category: 'React'
+publishedAt: '13-12-2023'
+isPublished: true
+popular: false
+image: '/images/persist-user/thumbnail.png'
+excerpt: "Przedstawię wam mój ulubiony sposób na podtrzymywanie sesji zalogowanego użytkownika w Reactcie z pomocą Redux Toolkit i Cookies."
+---
+
+Robiąc szybki research na pytanie: "How to persist User in React" znajdziemy wiele rozwiązań. Najpopularniejszymi metodami, które możemy spotkać są rozwiązania korzystające z **localstorage**, **Cookies**, **sessionstorage** lub z zewnętrznych bibliotek.
+
+Która metoda będzie najlepsza? To zależy:) Mi osobiście najbardziej podpasowała metoda, którą zaraz wam dokładniej opiszę i zademonstruję jak ją zaimplementować.
+
+## Co chcemy osiągnąć?
+
+Zacznijmy od rozpisania sobię, co konkretnie chcemy osiągnać - dzięki temu łatwiej nam będzie zobrazować samą implementację.
+
+ 1. Po zalogowaniu musimy przechować gdzieś token - w naszym przypadku JWT.
+ 2. Musimy również sprawdzać czy nasz token się nie przedawnił.
+ 3. Po ponownym wejściu na stronę, jeżeli token jest wciąż ważny, powinniśmy być dalej zalogowani.
+
+A teraz przejdźmy do konkretów 👇 
+
+## 1. Przechowywanie tokenu
+
+Miejscem gdzie będziemy przechowywać nasz token JWT będą **Cookies**. Do tego polecam bibliotekę [js-cookie](https://www.npmjs.com/package/js-cookie), dzieki której w prosty sposób możemy zapisywać, usuwać i odbierać wartości z ciasteczek, dodatkowo możemy ustawić na jak długo mają być ważne.
+
+Załóżmy więc, że wykonujemy request do logowania, jeżeli się powiedzie możemy zapisać nasz token.
+
+```ts
+import Cookies from "js-cookie";
+
+const handleLoginRequest = async () => {
+  const dataToSend = {
+    email,
+    password
+  };
+  const response = await loginService(dataToSend);
+  if (response.status !== 200) return console.log("LOGIN FAILED");
+  // ON LOGIN SUCCESS  
+  Cookies.set("jwt", response.data.token);
+};
+```
+
+Jeżeli chcemy ustawić, konkretną ważnosć dni **ciasteczka**, możemy to zrobić w taki sposób:
+
+```ts
+// TOKEN EXPIRES 7 DAYS FROM NOW
+Cookies.set("jwt", response.data.token, { expires: 7 })
+```
+
+## 2. Kontrolowanie ważności tokenu
+
+Mamy już przechowywany token, dzięki któremu możemy robić requesty. Zabierzmy się teraz za kontrolowanie jego ważności.
+
+Kluczowy do tego będzie **request**, który będzie nam zwracał przykładowo dane zalogowanego użytkownika.
+
+Miejscem do przechowywania tych danych będzie **store** w [Reduxie](https://redux-toolkit.js.org/).
+
+Stwórzmy zatem plik **store.ts** w folderze **/src/redux**.
+
+```ts
+import { configureStore } from "@reduxjs/toolkit";
+
+export const store = configureStore({
+  reducer: {},
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+```
+
+A następnie w folderze **/src/redux/reducers** plik **userReducer.ts**
+
+```ts
+import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
+
+const initialState = {
+  user: null,
+};
+
+export const userSlice = createSlice({
+  initialState,
+  name: "user",
+  reducers: {
+    // WYLOGOWANIE UŻYTKOWNIKA
+    logout: () => initialState,
+    // ZAPISANIE DANYCH UŻYTKOWNIKA
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+  },
+});
+
+// POBRANIE DANYCH UŻYTKOWNIKA
+export const getUser = (state: RootState) => state.user.user;
+export const { logout, setUser } = userSlice.actions;
+export default userSlice.reducer;
+```
+
+Interesują nas tutaj 3 rzeczy:
+
+ - logout - Czyszczenie stanu użytkownika
+ - setUser - Zapisanie danych użytkownika do state'u użytkownika.
+ - getUser - Pobranie danych ze state'u użytkownika
+
+Zaimportujmy teraz **userSlice** do naszego reduxowego **store**.
+
+```ts
+import { configureStore } from "@reduxjs/toolkit";
+import userSlice from "./reducers/userSlice";
+
+export const store = configureStore({
+  reducer: {
+    user: userSlice,
+  },
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+```
+
+Dodajmy teraz komponent **< Provider/>** z podpiętym **store**, aby umożliwić dostęp do danych Reduxa w naszej aplikacji.
+
+Koniecznym jest, aby **< Provider/>** znalazł się w komponencie najwyższego poziomu (przeważnie będzie to plik **main** albo **index**).
+
+```ts
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import store from './redux/store'
+import { Provider } from 'react-redux'
+import { Router } from './router/Router'
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <React.StrictMode>
+    <Provider store={store}>
+        <Router />
+    </Provider>
+  </React.StrictMode>
+);
+
+```
+
+Potrzebujemy jeszcze funkcji, która obsłuży wyczyszczenie state'u oraz usunięcie ciasteczka z JWT. 
+
+```ts
+import { Dispatch } from "@reduxjs/toolkit";
+import { logout } from "../../redux/reducers/userSlice";
+import Cookies from "js-cookie";
+
+export function logoutUser(dispatch: Dispatch) {
+  Cookies.remove("jwt");
+  dispatch(logout());
+  window.location.href = "/login";
+}
+```
+A także funkcji, która wyśle request do API z zapisanym tokenem JWT i w przypadku powodzenia zapisze dane do **reduxa** lub w przeciwnym przypadku wywoła funkcję wylogowania.
+
+```ts
+import { Dispatch } from "@reduxjs/toolkit";
+import { setUser } from "../../redux/reducers/userSlice";
+import { userInfoRequest } from "../../client/apiRequests";
+import { logoutUser } from "./logoutUser";
+
+export async function getUserDetails(dispatch: Dispatch) {
+    // API REQUEST TO GET USER INFO
+    const response = await userInfoRequest();
+    // IF FAILED - HANDLE LOGOUT USER
+    if (response.status !== 200) return logoutUser(dispatch);
+    // IF SUCCESS - SAVE DATA TO REDUX STORE
+    dispatch(setUser(response.data));
+    return true;
+}
+```
+
+
+No dobra, fajnie, ale jak to wszystko ma działać? - Już wyjaśniam:)
+
+Załóżmy, że mamy formularz logowania, flow będzie wyglądać następująco:
+
+ 1. Logujemy się do naszego konta
+ 2. Odebrany token JWT zapisujemy do Cookies
+ 3. Wywołujemy funkcję **getUserDetails** - która:
+    1. Wysyła request do API z naszym tokenem JWT w **headers**
+    2. Zapisuje pobrane dane do state'u w reduxie. - Jeżeli request się powiódł
+    3. Wywołuje funkcje wylogowania - Jeżeli request się NIE powiódł
+
+Dzięki takiemu rozwiązaniu, będziemy mieć pewność, że nasz token JWT jest ważny, bo jeżeli nie to request nie zwróci statusu 200 i po prostu nas wyloguje.
+
+<Image
+      src="/images/persist-user/reduxFLow.png"
+      alt="Grafika przedstawiająca flow logowania, odbierając po zalogowaniu token jwt, następnie wywołując funkcję która pobiera dane użytkownika z APi, a następnie zapisuje te dane do Reduxa"
+    />
+
+## 3. Utrzymanie sesji użytkownika
+
+Mamy już praktycznie wszystko, żeby dokończyć naszą logikę. Zostało dodać tylko mechanizm, który w przypadku wyczyszczenia stanu z naszego reduxa (np. w przypadku odświeżenia strony lub zamknięcia przeglądarki), pobierze ponownie dane użytkownika z **API** za pomocą przechowywanego **JWT**.
+
+Do obsługi tego, stworzymy customowego **hooka**, zatem w folderze **/src/hooks** tworzymy plik **usePersistUser.ts**
+
+```ts
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../redux/reducers/userSlice";
+import { getUserDetails } from "../utils/auth/getUserDetails";
+
+const usePersistUser = () => {
+  // GET USER DATA FROM REDUX STORE
+  const user = useSelector(getUser);
+  const dispatch = useDispatch();
+  // GET JWT TOKEN STORED IN COOKIES
+  const token = Cookies.get("jwt");
+
+  // HELPER TO WAIT FOR APPLICATION RENDER BEFORE HOOK JOB FINISH
+  const [loading, setLoading] = useState(true);
+
+  // FUNCTION TO FETCH USER DETAILS 
+  const handleGetUserDetails = async () => {
+    await getUserDetails(dispatch);
+    setLoading(false);
+  }
+
+  // USEEFFECT HOOK TO FETCH USER DETAILS WHEN DATA IN REDUX STORE IS EMPTY
+  // OR SIMPLY SETLOADING TO FALSE AND RENDER APP WITHOUT TRIGGERING ANY LOGIC
+  useEffect(() => {
+    if (token && !user) {
+      handleGetUserDetails();
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  return loading;
+};
+
+export default usePersistUser;
+```
+
+Jak widzicie logika jest dosyć prosta, ale skuteczna. Dzięki takiemu hookowi, będziemy mieć dane użytkownika zawsze pod ręka, a w przypadku gdy token się przedawni zostaniemy natychmiastowo wylogowani.
+
+Teraz wystarczy wywołać owy hook, najlepiej w komponencie bezpośrednio pod tym najwyższego poziomu (np. komponent odpowiedzialny za Routing reacta).
+
+```ts
+import { getUser } from "../redux/reducers/userSlice";
+import { useSelector } from "react-redux";
+import usePersistUser from "../hooks/usePersistUser";
+
+
+export function Router() {
+  const loading = usePersistUser();
+  const user = useSelector(getUser);
+
+  if (loading) return <>Loading...</>;
+
+  if (!user) console.log("Nie zalogowano")
+
+  if (user) console.log("Zalogowano");
+
+  return (
+    /// ROUTES
+  );
+}
+```
+
+<Image
+      src="/images/persist-user/persistFlow.png"
+      alt="Grafika przedstawiająca flow utrzymywania sesji po wejściu na stronę"
+    />
+
+## Podsumowanie
+
+Tak jak wspominałem wcześniej, jest wiele metod na utrzymywanie sesji wcześniej zalogowanego już użytkownika. Ja przedstawiłem Wam moją wersję, wykorzystującą **Ciasteczka** oraz **Redux Toolkit**.
+
+Metoda, którą przedstawiłem, daje nam korzyści takie jak:
+
+- Sprawdzanie na bieżąco ważności tokenu JWT
+- Dane użytkownika dostępnę "pod ręką"
+- Otrzymanie informacji, czy użytkownik jest zalogowany przed renderem widoków
+
+Miłego kodzenia i do usłyszenia! ✋

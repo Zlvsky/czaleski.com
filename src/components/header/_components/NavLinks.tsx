@@ -6,10 +6,10 @@ interface ISingleLink {
 }
 
 const ahrefs = [
-  {
-    href: '/about',
-    text: 'About'
-  },
+  // {
+  //   href: '/about',
+  //   text: 'About'
+  // },
   {
     href: '/work',
     text: 'Work'
