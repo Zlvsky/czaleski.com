@@ -38,15 +38,15 @@ body {
 /* code mdx */
 
 .post-code {
-  @apply border rounded-md dark:border-dark48;
+  @apply rounded-md border dark:border-dark48;
 }
 
 pre {
   @apply overflow-x-auto rounded-b-xl p-8 text-base;
 }
 
-article :not(pre)>code {
-  @apply bg-muted dark:bg-dark48 text-black dark:text-inherit mx-1 px-1.5;
+article :not(pre) > code {
+  @apply mx-1 bg-muted px-1.5 text-black dark:bg-dark48 dark:text-inherit;
 }
 
 code {
@@ -170,7 +170,7 @@ code {
 }
 
 article a {
-  @apply no-underline border-b border-black cursor-pointer font-semibold;
+  @apply cursor-pointer border-b border-black font-semibold no-underline;
 }
 
 .article div img {

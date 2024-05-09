@@ -1,0 +1,167 @@
+---
+title: "Hosting serverless nodejs on Vercel for free"
+category: 'nodejs'
+publishedAt: '23-01-2024'
+isPublished: true
+popular: false
+image: '/img/node-hosting/thumbnail.png'
+excerpt: "A short and concrete tutorial on how to host a simple API server using Serverless Functions."
+---
+
+Have you been, or are you currently in such a situation that after finishing work on your fullstack project, it's time to deploy and show it to the world? With the front-end there are basically no big problems, you just need to do it at least on **GitHub Pages** or **Netlify** and you basically have free hosting, along with a domain and SSL.
+
+The problem arises when it comes to hosting our **API** and, in addition, not paying a penny. Until a while ago the most popular solution was **Heroku**, unfortunately the free plan has been discontinued well, and you have to combine:)
+
+In this post I will share with you a practical step-by-step tutorial that will help you host your application in Node.js using free services.
+
+## What are Serverless Functions
+
+**Serverless functions**, is a way to host and run code without having to manage the server infrastructure. Unlike traditional hosting models, where you have to set up and maintain servers, **serverless functions** allow you to focus on the application logic itself, and the service provider takes care of the rest.
+
+### How do they work?
+
+1. Stateless - Called functions are stateless, meaning they do not store any information between calls.
+2. Specific function calls - To call a function, a trigger is required, such as a request via HTTP.
+3. Short life cycle - Serverless functions have a short cycle, they start up, do what they are supposed to do and finish the job.
+
+### What we won't use Serverless Functions for
+
+Serverless Functions have their limits, I would not recommend them for use in complex backend applications but rather for simpler ones. <br /> Below I will list some functionalities that Serverless Functions do not support.
+
+- Cron Jobs
+- WebSockets
+- Site Hosting
+- Puppeteer 
+- Maintain persistent connections, e.g. with mongodb (each funcition call will reconnect to the database, which increases response time)
+
+After a bit of theory, let's now move on to practice :-)
+
+## 1. Project preparation 
+
+In my case, the application is written using the Express.js framework.
+
+First, let's make sure that we export the main module in the main file.
+
+```ts
+import express from "express";
+
+const app = express();
+
+app.post("/api/register", createUser);
+app.post("/api/login", loginUser);
+
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
+
+export default app;
+```
+
+Next, in the root of the project, let's create a folder ```/api``` and in it a file ```index.ts``` (or index.js)
+
+```ts
+// import from the main app file
+import app from "../src/main";
+
+export default app;
+```
+
+And also in the root of the project a folder ```/dist``` and in it a EMPTY file ```.gitkeep```.
+
+The next step will be to create a configuration file for **vercel**. So we also create a ```vercel.json``` file in the project root.
+
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+        },
+        { "key": "Access-Control-Allow-Headers", "value": "*" }
+      ]
+    }
+  ]
+}
+```
+
+The first line makes sure that all requests will be redirected to our **Serverless Function** which we saved in the file ```/api/index.ts```.
+Currently our serverless function is our entire application, of course you can break this into smaller functions, which would improve performance, but then you would need to rebuild the entire application.
+
+On the other hand, the lines below is a simple configuration that will help us fight corsa.
+
+To be safe, we can also install the ```npm and cors``` library and use it in the main file.
+
+```ts
+const app = express();
+
+// CORS SETUP
+app.use(cors());
+```
+
+<Image
+      src="/img/node-hosting/cors.jpg"
+      alt="Cors meme"
+    />
+
+The last thing will be to add a line in ```package.json``` in the ```scripts``` section.
+
+```json
+...
+"scripts": {
+    ...
+    "vercel-build": "echo hello"
+  },
+...
+```
+
+## 2. Uploading the code to GitHub
+
+If we managed to complete all the steps from the previous popdunkt, we now need to upload the code to **GitHub**.
+
+There are plenty of tutorials on the Internet so no point in me describing it here:)
+
+## 3. Deploy to Vercel.com
+
+If we don't have an account yet, let's register via **GitHub**.
+
+Then we import our repository, set the root directory and framework to ```other``` and click deploy.
+
+After a few moments, our application should be available at the link that vercel generated for us.
+
+If our endpoint was saved at, for example, ```/api/login```, it will similarly be available at ```projectname.vercel.app/api/login```.
+
+<Image
+      src="/img/node-hosting/vercel1.PNG"
+      alt="Vercel 1"
+/>
+<Image
+      src="/img/node-hosting/vercel2.PNG"
+      alt="Vercel 2"
+/>
+<Image
+      src="/img/node-hosting/vercel3.PNG"
+      alt="Vercel 3"
+/>
+<Image
+      src="/img/node-hosting/vercel4.PNG"
+      alt="Vercel 4"
+/>
+
+We can test our API with a tool such as. ```postman```.
+
+## Summary
+
+Serverless Functions from Vercel is an interesting option to put up your own simple backend server written in **node.js** completely for free.
+
+Serverless Functions has its limitations and drawbacks, such as cold starts, but nevertheless, I think that for putting up a simple API server it should be enough.
+
+Enjoy your coding and stay tuned! ✋
