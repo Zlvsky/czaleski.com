@@ -42,15 +42,14 @@ body {
 }
 
 pre {
-  @apply  text-base p-8 rounded-b-xl overflow-x-auto;
+  @apply overflow-x-auto rounded-b-xl p-8 text-base;
 }
 
-article :not(pre)>code {
-  @apply bg-muted text-black mx-1 px-1.5;
+article :not(pre) > code {
+  @apply mx-1 bg-muted px-1.5 text-black;
 }
 
 code {
-  
 }
 .token.comment,
 .token.prolog,
@@ -60,7 +59,7 @@ code {
 }
 
 .token.punctuation {
-  color: #ABB2BF;
+  color: #abb2bf;
 }
 
 .namespace {
@@ -68,42 +67,43 @@ code {
 }
 
 .token.deleted {
-  color: #E06C75;
+  color: #e06c75;
   font-style: italic;
 }
 
 .token.symbol,
 .token.property,
 .token.property-access {
-  color: #E06C75;
+  color: #e06c75;
 }
 
 .token.tag,
 .token.operator,
 .token.keyword {
-  color: #C678DD;
+  color: #c678dd;
 }
 
-.token.number, .token.boolean {
-  color: #D19A66;
+.token.number,
+.token.boolean {
+  color: #d19a66;
 }
 
 .token.constant,
 .token.function,
 .token.builtin,
 .token.char {
-  color: #61AFEF;
+  color: #61afef;
 }
 
 .token.selector,
 .token.doctype {
-  color: #C678DD;
+  color: #c678dd;
   font-style: italic;
 }
 
 .token.attr-name,
 .token.inserted {
-  color: #E5C07B;
+  color: #e5c07b;
   font-style: italic;
 }
 
@@ -112,19 +112,19 @@ code {
 .token.entity,
 .language-css .token.string,
 .style .token.string {
-  color: #98C379;
+  color: #98c379;
 }
 
 .token.class-name,
 .token.atrule,
 .token.attr-value {
-  color: #E5C07B;
+  color: #e5c07b;
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  color: #D19A66;
+  color: #d19a66;
 }
 
 .token.important,
@@ -136,13 +136,9 @@ code {
   font-style: italic;
 }
 
-
 /* code mdx */
 
-
 @layer base {
-  
-
   .article ul,
   .article ol,
   .article p {
@@ -155,20 +151,26 @@ code {
   .clean-style table {
     border-width: 1px;
   }
-  .clean-style table > tbody, .clean-style table > tbody > tr, .clean-style table > tbody > tr > td  {
+  .clean-style table > tbody,
+  .clean-style table > tbody > tr,
+  .clean-style table > tbody > tr > td {
     border-width: inherit;
     border-color: inherit;
   }
-  .clean-style h1, .clean-style h2, .clean-style h3, .clean-style h4, .clean-style h5, .clean-style h6 {
+  .clean-style h1,
+  .clean-style h2,
+  .clean-style h3,
+  .clean-style h4,
+  .clean-style h5,
+  .clean-style h6 {
     font-size: revert;
     line-height: revert;
     letter-spacing: revert;
   }
 }
 
-
 article a {
-  @apply no-underline border-b-2 border-black cursor-pointer font-semibold;
+  @apply cursor-pointer border-b-2 border-black font-semibold no-underline;
 }
 
 .article div img {
