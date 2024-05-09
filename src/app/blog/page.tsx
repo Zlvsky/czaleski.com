@@ -1,4 +1,4 @@
-import ArticlePreview from '@/components/blog-page/ArticlePreview'
+import ArticlePreview from '@/components/blog/ArticlePreview'
 import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import Container from '@/components/layout/Container'

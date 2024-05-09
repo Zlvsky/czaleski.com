@@ -1,9 +1,9 @@
 'use client'
 import { motion } from 'framer-motion'
-import Connect from './_components/Connect'
 import Logo from './_components/Logo'
 import ModeToggle from './_components/ModeToggle'
 import NavLinks from './_components/NavLinks'
+import Socials from './_components/Socials'
 
 function Header() {
   return (
@@ -23,7 +23,7 @@ function Header() {
 
       <div className="flex flex-row items-center gap-1 sm:gap-3">
         {/* <NavLinks /> */}
-        <Connect />
+        <Socials />
         <ModeToggle />
       </div>
     </motion.div>

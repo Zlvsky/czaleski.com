@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { memo, ReactNode } from 'react'
+import { Author } from '../blog/Author'
 
 // @ts-ignore
 // const Share = dynamic(() => import("./share/Share").then((c) => c.Share), {
@@ -18,7 +19,6 @@ type MdxProps = {
 
 export const Mdx = memo<MdxProps>(({ frontmatter, children }) => {
   const { title, image, readingTime, category, publishedAt } = frontmatter
-  console.log(frontmatter)
   const formattedReadingTime = `${Math.round(readingTime)} minutes`
 
   return (
@@ -37,11 +37,12 @@ export const Mdx = memo<MdxProps>(({ frontmatter, children }) => {
 
         {/* <Info frontmatter={frontmatter} /> */}
       </header>
-      <section className="article w-full  text-[#404040] dark:text-[#a8a8a8]">
+      <section className="article w-full  border-b pb-8 text-[#404040] dark:text-[#a8a8a8]">
         {children}
         {/* <Share /> */}
         {/* <Edit /> */}
       </section>
+      <Author />
     </article>
   )
 })
