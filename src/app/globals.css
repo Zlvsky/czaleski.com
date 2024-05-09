@@ -38,7 +38,7 @@ body {
 /* code mdx */
 
 .post-code {
-  @apply border;
+  @apply border rounded-md dark:border-dark48;
 }
 
 pre {
@@ -46,7 +46,7 @@ pre {
 }
 
 article :not(pre)>code {
-  @apply bg-muted text-black mx-1 px-1.5;
+  @apply bg-muted dark:bg-dark48 text-black dark:text-inherit mx-1 px-1.5;
 }
 
 code {
@@ -168,10 +168,10 @@ code {
 
 
 article a {
-  @apply no-underline border-b-2 border-black cursor-pointer font-semibold;
+  @apply no-underline border-b border-black cursor-pointer font-semibold;
 }
 
 .article div img {
-  max-height: 200px;
+  max-height: 400px;
   object-fit: contain;
 }
