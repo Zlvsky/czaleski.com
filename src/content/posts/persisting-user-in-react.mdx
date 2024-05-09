@@ -8,25 +8,25 @@ image: '/img/persist-user/thumbnail.png'
 excerpt: "Przedstawię wam mój ulubiony sposób na podtrzymywanie sesji zalogowanego użytkownika w Reactcie z pomocą Redux Toolkit i Cookies."
 ---
 
-Robiąc szybki research na pytanie: "How to persist User in React" znajdziemy wiele rozwiązań. Najpopularniejszymi metodami, które możemy spotkać są rozwiązania korzystające z **localstorage**, **Cookies**, **sessionstorage** lub z zewnętrznych bibliotek.
+Doing a quick research on the question "How to persist User in React" we will find many solutions. The most popular methods we can find are solutions using **localstorage**, **Cookies**, **sessionstorage** or external libraries.
 
-Która metoda będzie najlepsza? To zależy:) Mi osobiście najbardziej podpasowała metoda, którą zaraz wam dokładniej opiszę i zademonstruję jak ją zaimplementować.
+Which method will be the best? Well, it depends:) I personally liked the method best, which I will describe to you in more detail shortly and demonstrate how to implement it.
 
-## Co chcemy osiągnąć?
+## What do we want to achieve?
 
-Zacznijmy od rozpisania sobię, co konkretnie chcemy osiągnać - dzięki temu łatwiej nam będzie zobrazować samą implementację.
+Let's start by writing out for ourselves what specifically we want to achieve - this will make it easier to visualize the implementation itself.
 
- 1. Po zalogowaniu musimy przechować gdzieś token - w naszym przypadku JWT.
- 2. Musimy również sprawdzać czy nasz token się nie przedawnił.
- 3. Po ponownym wejściu na stronę, jeżeli token jest wciąż ważny, powinniśmy być dalej zalogowani.
+ 1. After logging in, we need to store the token somewhere - in our case JWT.
+ 2. We also need to check if our token has expired.
+ 3. After re-entering the site, if the token is still valid, we should continue to be logged in.
 
-A teraz przejdźmy do konkretów 👇 
+Now let's get down to work 👇 
 
-## 1. Przechowywanie tokenu
+## 1. Storing the token
 
-Miejscem gdzie będziemy przechowywać nasz token JWT będą **Cookies**. Do tego polecam bibliotekę [js-cookie](https://www.npmjs.com/package/js-cookie), dzieki której w prosty sposób możemy zapisywać, usuwać i odbierać wartości z ciasteczek, dodatkowo możemy ustawić na jak długo mają być ważne.
+The place where we will store our JWT token will be **Cookies**. For this I recommend the library [js-cookie](https://www.npmjs.com/package/js-cookie), thanks to which we can easily save, delete and receive values from cookies, in addition, we can set for how long they should be valid.
 
-Załóżmy więc, że wykonujemy request do logowania, jeżeli się powiedzie możemy zapisać nasz token.
+So let's assume that we make a request to log in, if it succeeds we can save our token.
 
 ```ts
 import Cookies from "js-cookie";
@@ -43,22 +43,22 @@ const handleLoginRequest = async () => {
 };
 ```
 
-Jeżeli chcemy ustawić, konkretną ważnosć dni **ciasteczka**, możemy to zrobić w taki sposób:
+If we want to set, a specific validity of days of **cookies**, we can do it like this:
 
 ```ts
 // TOKEN EXPIRES 7 DAYS FROM NOW
 Cookies.set("jwt", response.data.token, { expires: 7 })
 ```
 
-## 2. Kontrolowanie ważności tokenu
+## 2. Controlling the validity of the token.
 
-Mamy już przechowywany token, dzięki któremu możemy robić requesty. Zabierzmy się teraz za kontrolowanie jego ważności.
+We already have a stored token with which we can make requests. Let's now get down to controlling its validity.
 
-Kluczowy do tego będzie **request**, który będzie nam zwracał przykładowo dane zalogowanego użytkownika.
+The key to this will be **request**, which will return to us, for example, the data of the logged-in user.
 
-Miejscem do przechowywania tych danych będzie **store** w [Reduxie](https://redux-toolkit.js.org/).
+The place to store this data will be **store** in [Redux](https://redux-toolkit.js.org/).
 
-Stwórzmy zatem plik **store.ts** w folderze **/src/redux**.
+So let's create a **store.ts** file in the **/src/redux** folder.
 
 ```ts
 import { configureStore } from "@reduxjs/toolkit";
