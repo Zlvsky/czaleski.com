@@ -38,15 +38,15 @@ body {
 /* code mdx */
 
 .post-code {
-  @apply border;
+  @apply border rounded-md dark:border-dark48;
 }
 
 pre {
   @apply overflow-x-auto rounded-b-xl p-8 text-base;
 }
 
-article :not(pre) > code {
-  @apply mx-1 bg-muted px-1.5 text-black;
+article :not(pre)>code {
+  @apply bg-muted dark:bg-dark48 text-black dark:text-inherit mx-1 px-1.5;
 }
 
 code {
@@ -170,10 +170,10 @@ code {
 }
 
 article a {
-  @apply cursor-pointer border-b-2 border-black font-semibold no-underline;
+  @apply no-underline border-b border-black cursor-pointer font-semibold;
 }
 
 .article div img {
-  max-height: 200px;
+  max-height: 400px;
   object-fit: contain;
 }

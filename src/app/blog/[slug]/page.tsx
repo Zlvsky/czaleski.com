@@ -1,3 +1,4 @@
+import Footer from '@/components/footer/Footer'
 import Header from '@/components/header/Header'
 import BigWrap from '@/components/layout/BigWrap'
 import Container from '@/components/layout/Container'
@@ -31,6 +32,7 @@ async function PostPage({ params: { slug } }: { params: { slug: string } }) {
           </Mdx>
         </BigWrap>
       </Container>
+      <Footer />
     </PageWrap>
   )
 }

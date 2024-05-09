@@ -7,14 +7,14 @@ import {
 } from 'react'
 
 import useCopy from '@/hooks/useCopy'
+import { getLanguageIcon } from '@/utils'
 import { CodeHeader } from './CodeHeader'
-// import { getLanguageIcon } from "@/utils/getLanguageIcon";
 
 export const Code = (
   props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
 ) => {
   const preRef = useRef<HTMLPreElement | null>(null)
-  const { isCopied, copy } = useCopy(preRef)
+  const { isCopied, copy } = useCopy(preRef.current?.textContent)
 
   const getCodeTitle = useCallback(() => {
     if (isValidElement(props.children)) {
@@ -31,7 +31,7 @@ export const Code = (
       const lang = props.className
       const programmingLang = lang?.split('-')[1]
       if (!programmingLang) return undefined
-      // return getLanguageIcon(programmingLang);
+      return getLanguageIcon(programmingLang)
     }
     return undefined
   }, [props.children, props.className])
