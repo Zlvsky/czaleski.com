@@ -1,11 +1,11 @@
 ---
-title: "React - Utrzymywanie sesji użytkownika za pomocą Redux'a i Cookies"
+title: "React - Maintaining user sessions with Redux and Cookies"
 category: 'react'
 publishedAt: '13-12-2023'
 isPublished: true
 popular: false
 image: '/img/persist-user/thumbnail.png'
-excerpt: "Przedstawię wam mój ulubiony sposób na podtrzymywanie sesji zalogowanego użytkownika w Reactcie z pomocą Redux Toolkit i Cookies."
+excerpt: "I'll introduce you to my favorite way to maintain a logged-in user's session in React with the help of Redux Toolkit and Cookies."
 ---
 
 Doing a quick research on the question "How to persist User in React" we will find many solutions. The most popular methods we can find are solutions using **localstorage**, **Cookies**, **sessionstorage** or external libraries.
@@ -58,7 +58,7 @@ The key to this will be **request**, which will return to us, for example, the d
 
 The place to store this data will be **store** in [Redux](https://redux-toolkit.js.org/).
 
-So let's create a **store.ts** file in the **/src/redux** folder.
+So let's create a ```store.ts``` file in the ```/src/redux``` folder.
 
 ```ts
 import { configureStore } from "@reduxjs/toolkit";
@@ -71,7 +71,7 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
-A następnie w folderze **/src/redux/reducers** plik **userReducer.ts**
+And then in the folder ```/src/redux/reducers``` file ```userReducer.ts```
 
 ```ts
 import { createSlice } from "@reduxjs/toolkit";
@@ -85,28 +85,28 @@ export const userSlice = createSlice({
   initialState,
   name: "user",
   reducers: {
-    // WYLOGOWANIE UŻYTKOWNIKA
+    // USER LOGOUT
     logout: () => initialState,
-    // ZAPISANIE DANYCH UŻYTKOWNIKA
+    // SAVE USER DATA
     setUser: (state, action) => {
       state.user = action.payload;
     },
   },
 });
 
-// POBRANIE DANYCH UŻYTKOWNIKA
+// GET USER DATA
 export const getUser = (state: RootState) => state.user.user;
 export const { logout, setUser } = userSlice.actions;
 export default userSlice.reducer;
 ```
 
-Interesują nas tutaj 3 rzeczy:
+We are interested in 3 things here:
 
- - logout - Czyszczenie stanu użytkownika
- - setUser - Zapisanie danych użytkownika do state'u użytkownika.
- - getUser - Pobranie danych ze state'u użytkownika
+ - logout - Clearing the user's state
+ - setUser - Saving user data to the user's state.
+ - getUser - Retrieving data from the user's state
 
-Zaimportujmy teraz **userSlice** do naszego reduxowego **store**.
+Let's now import ```userSlice``` into our redux **store**.
 
 ```ts
 import { configureStore } from "@reduxjs/toolkit";
@@ -122,9 +122,9 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
-Dodajmy teraz komponent **< Provider/>** z podpiętym **store**, aby umożliwić dostęp do danych Reduxa w naszej aplikacji.
+Let's now add a ```<Provider />``` component with a **store** plugged in to allow access to Redux data in our application.
 
-Koniecznym jest, aby **< Provider/>** znalazł się w komponencie najwyższego poziomu (przeważnie będzie to plik **main** albo **index**).
+It is necessary for ```<Provider />``` to be in the top-level component (mostly it will be **main** or **index** file).
 
 ```ts
 import React from 'react'
@@ -144,7 +144,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
 ```
 
-Potrzebujemy jeszcze funkcji, która obsłuży wyczyszczenie state'u oraz usunięcie ciasteczka z JWT. 
+We still need a function that will handle clearing the state and removing the cookie from JWT. 
 
 ```ts
 import { Dispatch } from "@reduxjs/toolkit";
@@ -157,7 +157,7 @@ export function logoutUser(dispatch: Dispatch) {
   window.location.href = "/login";
 }
 ```
-A także funkcji, która wyśle request do API z zapisanym tokenem JWT i w przypadku powodzenia zapisze dane do **reduxa** lub w przeciwnym przypadku wywoła funkcję wylogowania.
+And also a function that will send a request to the API with the stored JWT token and, if successful, write the data to **redux** or, if not, call the logout function.
 
 ```ts
 import { Dispatch } from "@reduxjs/toolkit";
@@ -177,29 +177,24 @@ export async function getUserDetails(dispatch: Dispatch) {
 ```
 
 
-No dobra, fajnie, ale jak to wszystko ma działać? - Już wyjaśniam:)
+Well, cool, but how is it all supposed to work? - Let me explain:)
 
-Załóżmy, że mamy formularz logowania, flow będzie wyglądać następująco:
+Let's assume we have a login form, flow will look as follows:
 
- 1. Logujemy się do naszego konta
- 2. Odebrany token JWT zapisujemy do Cookies
- 3. Wywołujemy funkcję **getUserDetails** - która:
-    1. Wysyła request do API z naszym tokenem JWT w **headers**
-    2. Zapisuje pobrane dane do state'u w reduxie. - Jeżeli request się powiódł
-    3. Wywołuje funkcje wylogowania - Jeżeli request się NIE powiódł
+ 1. We log into our account
+ 2. We save the received JWT token to Cookies
+ 3. We call the function ```getUserDetails(dispatch)``` - which:
+    1. Sends a request to the API with our JWT token in **headers**.
+    2. Saves the retrieved data to the state in redux. - If the request was successful
+    3. Calls the logout function - If the request was NOT successful
 
-Dzięki takiemu rozwiązaniu, będziemy mieć pewność, że nasz token JWT jest ważny, bo jeżeli nie to request nie zwróci statusu 200 i po prostu nas wyloguje.
+With this solution, we will be sure that our JWT token is valid, because if it is not, the request will not return a status of 200 and will simply log us out.
 
-<Image
-      src="/img/persist-user/reduxFLow.png"
-      alt="Grafika przedstawiająca flow logowania, odbierając po zalogowaniu token jwt, następnie wywołując funkcję która pobiera dane użytkownika z APi, a następnie zapisuje te dane do Reduxa"
-    />
+## 3. Maintaining the user session
 
-## 3. Utrzymanie sesji użytkownika
+We already have practically everything to complete our logic. All that's left to do is to add a mechanism that, when we clear the state from our redux (e.g. when we refresh the page or close the browser), will retrieve the user's data again from **API** using the stored **JWT**.
 
-Mamy już praktycznie wszystko, żeby dokończyć naszą logikę. Zostało dodać tylko mechanizm, który w przypadku wyczyszczenia stanu z naszego reduxa (np. w przypadku odświeżenia strony lub zamknięcia przeglądarki), pobierze ponownie dane użytkownika z **API** za pomocą przechowywanego **JWT**.
-
-Do obsługi tego, stworzymy customowego **hooka**, zatem w folderze **/src/hooks** tworzymy plik **usePersistUser.ts**
+To handle this, we will create a custom **hook**, so in the ```/src/hooks``` folder we create the ```usePersistUser.ts``` file.
 
 ```ts
 import { useState, useEffect } from "react";
@@ -239,10 +234,9 @@ const usePersistUser = () => {
 
 export default usePersistUser;
 ```
+As you can see, the logic is quite simple, but effective. Thanks to such a hook, we will always have the user's data at hand, and in case the token expires we will be immediately logged out.
 
-Jak widzicie logika jest dosyć prosta, ale skuteczna. Dzięki takiemu hookowi, będziemy mieć dane użytkownika zawsze pod ręka, a w przypadku gdy token się przedawni zostaniemy natychmiastowo wylogowani.
-
-Teraz wystarczy wywołać owy hook, najlepiej w komponencie bezpośrednio pod tym najwyższego poziomu (np. komponent odpowiedzialny za Routing reacta).
+Now all we need to do is to call this hook, preferably in a component directly under that of the highest level (for example, the component responsible for Routing reacta).
 
 ```ts
 import { getUser } from "../redux/reducers/userSlice";
@@ -256,9 +250,9 @@ export function Router() {
 
   if (loading) return <>Loading...</>;
 
-  if (!user) console.log("Nie zalogowano")
+  if (!user) console.log("Not logged in")
 
-  if (user) console.log("Zalogowano");
+  if (user) console.log("Logged in");
 
   return (
     /// ROUTES
@@ -266,19 +260,14 @@ export function Router() {
 }
 ```
 
-<Image
-      src="/img/persist-user/persistFlow.png"
-      alt="Grafika przedstawiająca flow utrzymywania sesji po wejściu na stronę"
-    />
+## Summary
 
-## Podsumowanie
+As I mentioned earlier, there are many methods to maintain the session of a previously already logged-in user. I presented you with my version, using **Cookies** and **Redux Toolkit**.
 
-Tak jak wspominałem wcześniej, jest wiele metod na utrzymywanie sesji wcześniej zalogowanego już użytkownika. Ja przedstawiłem Wam moją wersję, wykorzystującą **Ciasteczka** oraz **Redux Toolkit**.
+The method I presented gives us benefits such as:
 
-Metoda, którą przedstawiłem, daje nam korzyści takie jak:
+- Checking the validity of the JWT token in real time
+- User data available "at hand"
+- Getting information whether the user is logged in before the view renderer
 
-- Sprawdzanie na bieżąco ważności tokenu JWT
-- Dane użytkownika dostępnę "pod ręką"
-- Otrzymanie informacji, czy użytkownik jest zalogowany przed renderem widoków
-
-Miłego kodzenia i do usłyszenia! ✋
+Enjoy your coding and stay tuned! ✋

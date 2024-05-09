@@ -1,10 +1,10 @@
 'use client'
 
-import SectionHeader from '@/components/ui/SectionHeader'
 import { MDXRemote } from 'next-mdx-remote'
 import { ImageProps } from 'next/image'
 import { DetailedHTMLProps, HTMLAttributes } from 'react'
 import { Code } from '../code/Code'
+import { PostHeading } from '../heading/Heading'
 import { Image } from '../image/Image'
 
 interface HeadingComponentProps {
@@ -16,19 +16,19 @@ const customMdxComponents = {
     return <Code {...props} />
   },
   h2: (props: HeadingComponentProps) => (
-    <SectionHeader headingTag="h2" {...props}></SectionHeader>
+    <PostHeading headingTag="h2" {...props}></PostHeading>
   ),
   h3: (props: HeadingComponentProps) => (
-    <SectionHeader headingTag="h3" {...props}></SectionHeader>
+    <PostHeading headingTag="h3" {...props}></PostHeading>
   ),
   h4: (props: HeadingComponentProps) => (
-    <SectionHeader headingTag="h4" {...props}></SectionHeader>
+    <PostHeading headingTag="h4" {...props}></PostHeading>
   ),
   h5: (props: HeadingComponentProps) => (
-    <SectionHeader headingTag="h5" {...props}></SectionHeader>
+    <PostHeading headingTag="h5" {...props}></PostHeading>
   ),
   h6: (props: HeadingComponentProps) => (
-    <SectionHeader headingTag="h6" {...props}></SectionHeader>
+    <PostHeading headingTag="h6" {...props}></PostHeading>
   ),
   img: ({ alt, src }: ImageProps) => <Image src={src} alt={alt ? alt : ''} />,
   //   Sparkles,
