@@ -27,7 +27,7 @@ async function PostPage({ params: { slug } }: { params: { slug: string } }) {
       <Header />
       <Container>
         <BigWrap>
-          <Mdx frontmatter={frontmatter}>
+          <Mdx frontmatter={frontmatter} slug={slug}>
             <Content content={transformedMdx} />
           </Mdx>
         </BigWrap>

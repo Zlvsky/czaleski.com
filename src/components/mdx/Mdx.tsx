@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { memo, ReactNode } from 'react'
 import { Author } from '../blog/Author'
+import { PostFooter } from './post-footer/PostFooter'
 
 // @ts-ignore
 // const Share = dynamic(() => import("./share/Share").then((c) => c.Share), {
@@ -14,10 +15,11 @@ import { Author } from '../blog/Author'
 
 type MdxProps = {
   readonly frontmatter: any
+  readonly slug: string
   readonly children: ReactNode
 }
 
-export const Mdx = memo<MdxProps>(({ frontmatter, children }) => {
+export const Mdx = memo<MdxProps>(({ frontmatter, slug, children }) => {
   const { title, image, readingTime, category, publishedAt } = frontmatter
   const formattedReadingTime = `${Math.round(readingTime)} minutes`
 
@@ -39,8 +41,7 @@ export const Mdx = memo<MdxProps>(({ frontmatter, children }) => {
       </header>
       <section className="article w-full  border-b pb-8 text-[#404040] dark:text-[#a8a8a8]">
         {children}
-        {/* <Share /> */}
-        {/* <Edit /> */}
+        <PostFooter resource={frontmatter} slug={slug} />
       </section>
       <Author />
     </article>
