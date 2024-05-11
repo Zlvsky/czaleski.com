@@ -5,7 +5,12 @@ import { HOST } from '@/utils/consts'
 import { Edit } from './edit/Edit'
 import { Share } from './share/Share'
 
-export const PostFooter = memo(({ resource, slug }) => {
+interface IPostFooter {
+  readonly resource: any
+  readonly slug: string
+}
+
+export const PostFooter = memo<IPostFooter>(({ resource, slug }) => {
   const url = `${HOST}/blog/${slug}`
 
   return (

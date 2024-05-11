@@ -2,7 +2,7 @@
 import { memo } from 'react'
 
 type ImageProps = {
-  readonly src: string
+  readonly src: any
   readonly alt: string
   readonly width?: string | number
   readonly height?: string | number
