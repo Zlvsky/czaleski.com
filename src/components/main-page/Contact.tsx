@@ -4,7 +4,7 @@ import CheckSvg from '@/assets/icons/common/check.svg'
 import CopySvg from '@/assets/icons/common/copy.svg'
 import MailSvg from '@/assets/icons/common/email.svg'
 import { personalData } from '@/data/personal'
-import useCopy from '@/hooks/useCopy'
+import { useCopyString } from '@/hooks/useCopy'
 import { useEffect, useRef, useState } from 'react'
 
 const PingDot = () => {
@@ -46,7 +46,7 @@ const LocalTime = () => {
 function Contact() {
   const [type, setType] = useState<null | 'email' | 'copy'>(null)
   const timeout = useRef<any>(null)
-  const { isCopied, copy } = useCopy(personalData.email)
+  const { isCopied, copy } = useCopyString(personalData.email)
 
   const handleSetType = (type: 'email' | 'copy') => {
     clearTimeout(timeout.current)

@@ -6,7 +6,7 @@ import {
   useRef
 } from 'react'
 
-import useCopy from '@/hooks/useCopy'
+import { useCopyRef } from '@/hooks/useCopy'
 import { getLanguageIcon } from '@/utils'
 import { CodeHeader } from './CodeHeader'
 
@@ -14,7 +14,7 @@ export const Code = (
   props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
 ) => {
   const preRef = useRef<HTMLPreElement | null>(null)
-  const { isCopied, copy } = useCopy(preRef.current?.textContent)
+  const { isCopied, copy } = useCopyRef(preRef)
 
   const getCodeTitle = useCallback(() => {
     if (isValidElement(props.children)) {
