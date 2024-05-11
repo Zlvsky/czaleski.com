@@ -38,7 +38,7 @@ function Hero() {
         <p className="text-[#555] dark:text-[#a8a8a8]">
           Currently working as a sole frontend developer,{' '}
           <a
-            className="font-medium text-black underline dark:text-white"
+            className="border-b border-black font-medium text-black dark:border-white dark:text-white"
             href="https://hireme.czaleski.com"
             target="_blank"
           >
