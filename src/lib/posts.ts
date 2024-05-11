@@ -8,9 +8,16 @@ import { getAllResources, getResourceBySlug, getResourcesPaths } from './resourc
 dayjs.extend(customParseFormat)
 
 const POSTS_PATH = path.join(process.cwd(), 'src/content/posts')
+const WORKS_PATH = path.join(process.cwd(), 'src/content/works')
 
 export const getPostBySlug = async (slug: string) => {
   const post = await getResourceBySlug(slug, POSTS_PATH)
+
+  return post
+}
+
+export const getWorkBySlug = async (slug: string) => {
+  const post = await getResourceBySlug(slug, WORKS_PATH)
 
   return post
 }

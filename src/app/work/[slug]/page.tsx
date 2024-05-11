@@ -6,11 +6,11 @@ import PageWrap from '@/components/layout/PageWrap'
 import { Mdx } from '@/components/mdx/Mdx'
 import Content from '@/components/mdx/content/Content'
 import { getMetadata } from '@/lib/metadata'
-import { getPostBySlug } from '@/lib/posts'
+import { getWorkBySlug } from '@/lib/posts'
 
 export async function generateMetadata({ params }: any) {
   const slug = params!.slug as string
-  const { frontmatter } = await getPostBySlug(slug)
+  const { frontmatter } = await getWorkBySlug(slug)
 
   return getMetadata({
     title: frontmatter.title,
@@ -20,14 +20,14 @@ export async function generateMetadata({ params }: any) {
   })
 }
 
-async function PostPage({ params: { slug } }: { params: { slug: string } }) {
-  const { transformedMdx, frontmatter } = await getPostBySlug(slug)
+async function WorkPage({ params: { slug } }: { params: { slug: string } }) {
+  const { transformedMdx, frontmatter } = await getWorkBySlug(slug)
   return (
     <PageWrap>
       <Header />
       <Container>
         <BigWrap>
-          <Mdx type="POST" frontmatter={frontmatter} slug={slug}>
+          <Mdx type="WORK" frontmatter={frontmatter} slug={slug}>
             <Content content={transformedMdx} />
           </Mdx>
         </BigWrap>
@@ -37,4 +37,4 @@ async function PostPage({ params: { slug } }: { params: { slug: string } }) {
   )
 }
 
-export default PostPage
+export default WorkPage

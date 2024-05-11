@@ -1,0 +1,43 @@
+---
+title: "Visity"
+isPublished: true
+popular: false
+image: '/img/works/work2.png'
+excerpt: "SaaS application for creating simple landing pages in minutes targeted to small businesses."
+---
+
+Visity is a Software as a Service (SaaS) application designed to cater to the needs of small businesses by providing them with a platform to effortlessly create simple yet effective landing pages in a matter of minutes. Visity was targeted to meet the requirements of the Polish market, aiming to empower small business owners with a user-friendly and efficient solution for establishing their online presence.
+
+## Tech Stack
+
+### Frontend
+I chose to build the frontend of our application with Next.js because I needed a framework that could handle server-side rendering and provide dynamic page generation. Next.js offers a seamless development experience with its React-based approach and built-in features like server-side rendering and static site generation. This allows us to create fast, interactive user interfaces while ensuring optimal performance and SEO.
+
+### Backend
+Originally, I set up a separate backend infrastructure to manage data and handle business logic. However, as the project evolved, I realized the need for a more integrated solution. That's when I decided to migrate backend to utilize Next.js API routes. This transition simplified architecture and reduced costs on early stages.
+
+### Database
+For database solution, I opted for MongoDB because of its simplicity and storing data in cloud. There was also no need for relational type of database.
+
+### Styling
+I chose Tailwind CSS for styling our application because of its utility-first approach and ease of customization. With Tailwind CSS, I can easily apply styles directly in the markup using utility classes, which speeds up development and ensures consistency across our UI.
+
+### Deployment and Hosting
+To deploy and host our application I chose Vercel. It offers seamless integration with Next.js, providing automated deployment pipelines, scalability, and performance optimizations out of the box.
+
+## Challenges Faced
+
+### Dynamic Pages Creation and Handling 404 Errors
+One of the main challenges I've encountered was implementing dynamic page creation by users and ensuring proper handling of 404 errors for pages that do not exist. Since Visity allows users to create their own landing pages, each with unique content and URL, I've needed a robust solution to fetch these dynamic pages from the database and render them on the fly.
+
+To address this challenge, I developed a dynamic routing mechanism that retrieves page data from the database based on the requested URL. This involved setting up dynamic routes in Next.js to handle incoming requests and querying the database to fetch the corresponding page content. Additionally, I implemented logic to gracefully handle 404 errors for pages that are not found, providing users with a user-friendly error page and guiding them back to the main site.
+
+### Protected Routes and Authentication
+Implementing protected routes and authentication was another significant challenge I faced. Since Visity allows users to create and manage their landing pages, it was crucial to ensure that only authorized users could access certain parts of the application, such as the dashboard for managing pages.
+
+To address this challenge, I implemented authentication using **JWT** (JSON Web Tokens) and set up protected routes that require users to authenticate before accessing restricted content. This involved integrating authentication **middleware** into backend API routes to verify user credentials and enforce access controls. Additionally, I implemented user authentication flows, such as sign-up, login, and logout, to provide a seamless UX while maintaining security.
+
+### Custom Themes for Pages Created by Users
+Another challenge I've encountered was implementing custom themes for pages created by users. Visity allows users to personalize their landing pages with custom themes, including color schemes, fonts, and layout options. However, implementing a flexible and intuitive theme customization interface posed several technical challenges.
+
+I developed a theme customization feature that allows users to select predefined themes. Additionally, I implemented logic to dynamically apply the selected theme styles to the user's landing pages with a live preview.

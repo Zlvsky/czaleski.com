@@ -16,11 +16,12 @@ import { PostFooter } from './post-footer/PostFooter'
 type MdxProps = {
   readonly frontmatter: any
   readonly slug: string
+  readonly type: 'POST' | 'WORK'
   readonly children: ReactNode
 }
 
-export const Mdx = memo<MdxProps>(({ frontmatter, slug, children }) => {
-  const { title, image, readingTime, category, publishedAt } = frontmatter
+export const Mdx = memo<MdxProps>(({ frontmatter, slug, type = 'POST', children }) => {
+  const { title, excerpt, image, readingTime, category, publishedAt } = frontmatter
   const formattedReadingTime = `${Math.round(readingTime)} minutes`
 
   return (
@@ -29,21 +30,22 @@ export const Mdx = memo<MdxProps>(({ frontmatter, slug, children }) => {
         <h1 className="mt-2 flex flex-row items-center gap-1 text-xl font-normal tracking-tight">
           {title}
         </h1>
-        <div className="mt-2 flex flex-row items-center gap-1 text-sm text-[#555] dark:text-[#a8a8a8]">
-          <span>{category}</span>•<span>{formattedReadingTime}</span>•
-          <span>{publishedAt}</span>
-        </div>
+        {type === 'WORK' && <p className="text-[#555] dark:text-[#a8a8a8]">{excerpt}</p>}
+        {type === 'POST' && (
+          <div className="mt-2 flex flex-row items-center gap-1 text-sm text-[#555] dark:text-[#a8a8a8]">
+            <span>{category}</span>•<span>{formattedReadingTime}</span>•
+            <span>{publishedAt}</span>
+          </div>
+        )}
         <div className="my-10">
           <Image width={768} height={300} src={image} alt={title} />
         </div>
-
-        {/* <Info frontmatter={frontmatter} /> */}
       </header>
       <section className="article w-full  border-b pb-8 text-[#404040] dark:text-[#a8a8a8]">
         {children}
-        <PostFooter resource={frontmatter} slug={slug} />
+        {type === 'POST' && <PostFooter resource={frontmatter} slug={slug} />}
       </section>
-      <Author />
+      {type === 'POST' && <Author />}
     </article>
   )
 })

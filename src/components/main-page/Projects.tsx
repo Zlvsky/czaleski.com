@@ -2,18 +2,10 @@
 
 import LinkSvg from '@/assets/icons/common/link.svg'
 import GithubSvg from '@/assets/icons/social/github.svg'
-import work1 from '@/assets/images/works/work1.png'
-import work2 from '@/assets/images/works/work2.png'
-import work3 from '@/assets/images/works/work3.png'
-import work4 from '@/assets/images/works/work4.png'
-import work5 from '@/assets/images/works/work5.png'
-import work6 from '@/assets/images/works/work6.png'
-import work7 from '@/assets/images/works/work7.png'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useState } from 'react'
+import Link from 'next/link'
 import { Button } from '../ui/button/Button'
-import ProjectOverview from './ProjectOverview'
 
 const data = [
   {
@@ -21,7 +13,8 @@ const data = [
     shortDescription:
       'Platform for developers to boost their coding skills by solving real-world problems and daily practices.',
     year: 'Ongoing',
-    image: work1,
+    image: '/img/works/work1.png',
+    slug: 'betterdevs',
     live: 'https://betterdevs.net',
     github: 'https://github.com/Zlvsky/betterDevs/'
   },
@@ -30,7 +23,8 @@ const data = [
     shortDescription:
       'SaaS application for creating simple landing pages in minutes targeted to small businesses.',
     year: '2024',
-    image: work2,
+    image: '/img/works/work2.png',
+    slug: 'visity',
     live: 'https://visity.pl'
   },
   {
@@ -38,14 +32,16 @@ const data = [
     shortDescription:
       'Feedback widget that can be embedded on websites to collect feedback and send console logs with page screenshots.',
     year: '2024',
-    image: work3
+    slug: 'feedback-widget',
+    image: '/img/works/work3.png'
   },
   {
     name: 'Realm of Dungeons',
     shortDescription:
       'Web multiplayer game in retro style, based on idle mechanics inspired by Shakes & Fidget.',
     year: '2023',
-    image: work4,
+    image: '/img/works/work4.png',
+    slug: 'realm-of-dungeons',
     live: 'https://realmofdungeons.pages.dev',
     github: 'https://github.com/Zlvsky/realm-of-dungeons'
   },
@@ -53,14 +49,16 @@ const data = [
     name: 'Konva Moodboard',
     shortDescription: `Web app to create and export canvas moodboards with custom images.`,
     year: '2022',
-    image: work5,
+    image: '/img/works/work5.png',
+    slug: 'konva-moodboard',
     github: 'https://github.com/Zlvsky/React-Konva-moodboard'
   },
   {
     name: 'One-place',
     shortDescription: `CRUD admin panel to manage business based on orders, that don't need online shop.`,
     year: '2021',
-    image: work6,
+    image: '/img/works/work6.png',
+    slug: 'one-place',
     github: 'https://github.com/Zlvsky/one-place'
   },
   {
@@ -68,7 +66,8 @@ const data = [
     shortDescription:
       'Custom-made bot that automates the insertion of offers on a IT freelancing portal',
     year: '2021',
-    image: work7
+    slug: 'automation-bot',
+    image: '/img/works/work7.png'
   }
   // {
   //   name: 'ZSEClicker',
@@ -82,13 +81,17 @@ const SingleProject = ({
   shortDescription,
   year,
   image,
+  slug,
   live,
   github
 }: (typeof data)[0]) => {
   return (
     <motion.div layoutId={name} className="flex flex-col gap-8">
       {image && (
-        <div className="group relative min-h-40 w-full cursor-pointer overflow-hidden rounded-xl p-1 shadow-project dark:border dark:border-dark48">
+        <Link
+          href={`/work/${slug}`}
+          className="group relative min-h-40 w-full cursor-pointer overflow-hidden rounded-xl p-1 shadow-project dark:border dark:border-dark48"
+        >
           <Button className="absolute left-1/2 z-10 -translate-x-1/2 -translate-y-10 border bg-black text-white transition-transform group-hover:-translate-y-2 dark:bg-white dark:text-black">
             Read more
           </Button>
@@ -100,7 +103,7 @@ const SingleProject = ({
             alt=""
             className="scale h-full rounded-md transition-transform group-hover:translate-y-10"
           />
-        </div>
+        </Link>
       )}
       <div className="flex flex-col justify-between pr-4 sm:flex-row">
         <p className="text-[#555] dark:text-[#a8a8a8] sm:w-3/5">{shortDescription}</p>
@@ -138,8 +141,6 @@ const SingleProject = ({
 }
 
 function Projects() {
-  const [selected, setSelected] = useState<null | (typeof data)[0]>(null)
-
   return (
     <>
       <div className="mt-8">
@@ -150,9 +151,6 @@ function Projects() {
           ))}
         </div>
       </div>
-      <AnimatePresence>
-        {selected && <ProjectOverview {...selected} setSelected={setSelected} />}
-      </AnimatePresence>
     </>
   )
 }

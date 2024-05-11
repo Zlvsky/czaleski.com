@@ -1,0 +1,28 @@
+---
+title: "Feedback Widget"
+isPublished: true
+popular: false
+image: '/img/works/work3.png'
+excerpt: "Feedback widget that can be embedded on websites to collect feedback and send console logs with page screenshots."
+---
+
+Feedback Widget is a versatile tool designed to facilitate the collection of feedback on websites and web applications. It is an embeddable widget that can be easily integrated into any website or web app through a CDN script. Built using pure React with Tailwind CSS for styling, Feedback Widget offers a seamless user experience while providing valuable insights to website owners and developers.
+
+## Features
+
+- **Interception of Web Requests:** Feedback Widget intercepts fetches, XMLHttpRequests (XHRs), console logs, and console errors, allowing users to provide feedback directly within their browser environment.
+  
+- **Data Collection:** In addition to user feedback, Feedback Widget collects browser name and system data to provide context for feedback submissions.
+  
+- **Screenshot Capture:** Feedback Widget includes a feature to capture screenshots of the current webpage using the html2canvas library. This visual representation helps users communicate their feedback more effectively.
+  
+## Challenges
+
+### Building to a Single File
+One of the main challenges I've faced was building the entire application into a single JavaScript file and a single CSS file. This required careful optimization and bundling to ensure that all dependencies, including React, Tailwind CSS, and third-party libraries, were included in the final bundle without compromising performance.
+
+### Isolating Styles
+To prevent styles from being overwritten in existing websites and web apps where Feedback Widget is embedded, I've needed to isolate the CSS styles. I achieved this by leveraging Tailwind CSS's utility-first approach and scoping CSS classes to the Feedback Widget container using unique prefixes.
+
+### Capturing Screenshots
+Implementing screenshot capture functionality posed a unique challenge, as it required capturing the content of the webpage and sending it along with feedback submissions. Resolved it by integrating the html2canvas library, which allowed to generate a screenshot of the current webpage as a binary image to be send as a multipart form-data.

@@ -2,10 +2,6 @@ import LinkSVG from '@/assets/icons/common/link2.svg'
 
 const links = [
   {
-    name: 'Privacy Policy',
-    link: '/privacy-policy'
-  },
-  {
     name: 'Twitter',
     link: 'https://twitter.com/zlvskyy'
   },

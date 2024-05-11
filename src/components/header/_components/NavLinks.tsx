@@ -11,8 +11,8 @@ const ahrefs = [
   //   text: 'About'
   // },
   {
-    href: '/work',
-    text: 'Work'
+    href: 'https://hireme.czaleski.com/',
+    text: 'Hire'
   },
   {
     href: '/blog',
