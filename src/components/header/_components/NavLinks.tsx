@@ -52,6 +52,11 @@ const SingleLink: React.FC<ISingleLink> = ({ href, text }) => {
 const NavLinks = () => {
   return (
     <ul className="flex flex-row items-center gap-1 sm:gap-2">
+      <Link href={'/'} className="text-sm text-gray2 dark:text-white/90 sm:hidden">
+        <li className="cursor-pointer rounded-md bg-transparent px-2 py-1.5 transition-colors ease-in hover:bg-grayE8/40 dark:hover:bg-dark26">
+          Home
+        </li>
+      </Link>
       {ahrefs.map((link, index) => (
         <SingleLink key={index} {...link} />
       ))}
