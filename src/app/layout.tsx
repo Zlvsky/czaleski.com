@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
+import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -6,9 +7,9 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
-  title: 'Freelance Web Developer | Krzysztof Zaleski',
+  title: 'Web & Frontend Developer | Krzysztof Zaleski',
   description:
-    'Freelance Web & Frontend developer. Specialising in development of custom websites, MVP and web applications JavaScript, React.js, Next.js.'
+    'Web & Frontend developer. Specialising in development of web applications, MVPs and websites. JavaScript, React.js, Next.js.'
 }
 
 export default function RootLayout({
@@ -26,12 +27,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
-        {/* <div id="goodsoft-feedback-widget"></div>
-        <link
-          href="https://rawcdn.githack.com/goodsoftpl/widget/b9691966b7bfbec7871b64c179ef653e9842c633/main.css"
-          rel="stylesheet"
-        />
-        <Script src="https://rawcdn.githack.com/goodsoftpl/widget/b9691966b7bfbec7871b64c179ef653e9842c633/main.js"></Script> */}
+        <Analytics />
       </body>
     </html>
   )
