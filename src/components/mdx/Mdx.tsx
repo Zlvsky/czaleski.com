@@ -30,9 +30,11 @@ export const Mdx = memo<MdxProps>(({ frontmatter, slug, type = 'POST', children 
         <h1 className="mt-2 flex flex-row items-center gap-1 text-xl font-normal tracking-tight">
           {title}
         </h1>
-        {type === 'WORK' && <p className="text-[#555] dark:text-[#a8a8a8]">{excerpt}</p>}
+        {type === 'WORK' && (
+          <p className="text-grayText1 dark:text-grayText2">{excerpt}</p>
+        )}
         {type === 'POST' && (
-          <div className="mt-2 flex flex-row items-center gap-1 text-sm text-[#555] dark:text-[#a8a8a8]">
+          <div className="mt-2 flex flex-row items-center gap-1 text-sm text-grayText1 dark:text-grayText2">
             <span>{category}</span>•<span>{formattedReadingTime}</span>•
             <span>{publishedAt}</span>
           </div>
@@ -41,7 +43,7 @@ export const Mdx = memo<MdxProps>(({ frontmatter, slug, type = 'POST', children 
           <Image width={768} height={300} src={image} alt={title} />
         </div>
       </header>
-      <section className="article w-full  border-b pb-8 text-[#404040] dark:text-[#a8a8a8]">
+      <section className="article w-full  border-b pb-8 text-[#404040] dark:text-grayText2">
         {children}
         {type === 'POST' && <PostFooter resource={frontmatter} slug={slug} />}
       </section>

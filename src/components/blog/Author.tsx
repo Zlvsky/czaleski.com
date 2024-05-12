@@ -16,7 +16,7 @@ export const Author = memo(() => {
 
       <div className="flex flex-col">
         <h3 className={'text-lg'}>Written by Krzysztof Zaleski</h3>
-        <p className={'mb-3 text-[#555] dark:text-[#a8a8a8]'}>
+        <p className={'mb-3 text-grayText1 dark:text-grayText2'}>
           Web & Frontend developer based in Poland. Passionate about creative solutions
           and building apps from scratch.
         </p>

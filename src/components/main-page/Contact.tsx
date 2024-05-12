@@ -37,7 +37,7 @@ const LocalTime = () => {
   }, [])
 
   return (
-    <span className="text-sm text-[#555] dark:text-[#a8a8a8]">
+    <span className="text-sm text-grayText1 dark:text-grayText2">
       Poland, local time: {localTime}
     </span>
   )
@@ -68,7 +68,7 @@ function Contact() {
 
   return (
     <div className="mt-8 flex flex-col gap-2">
-      <h3 className="flex flex-row items-center gap-1 text-sm text-[#555] dark:text-[#a8a8a8]">
+      <h3 className="flex flex-row items-center gap-1 text-sm text-grayText1 dark:text-grayText2">
         <PingDot /> Available for new challanges.
       </h3>
       <div className="flex flex-row items-center gap-3">
@@ -88,7 +88,7 @@ function Contact() {
         >
           {isCopied ? <CheckSvg className="h-4 w-4" /> : <CopySvg className="h-4 w-4" />}
         </div>
-        <div className="flex flex-col text-sm text-[#555] dark:text-[#a8a8a8]">
+        <div className="flex flex-col text-sm text-grayText1 dark:text-grayText2">
           <span>Feel free to reach me out</span>
           {type === null ? (
             <span>Send me an email</span>

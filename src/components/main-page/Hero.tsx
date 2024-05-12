@@ -28,14 +28,14 @@ function Hero() {
         <h1 className="mb-4 text-3xl font-normal tracking-tight">
           Web & frontend developer, proficient in React ecosystem.
         </h1>
-        <p className="mb-4 text-[#555] dark:text-[#a8a8a8]">
+        <p className="mb-4 text-grayText1 dark:text-grayText2">
           Seamlessly transitioning from crafting websites to developing web applications.
         </p>
-        <p className="mb-4 text-[#555] dark:text-[#a8a8a8]">
+        <p className="mb-4 text-grayText1 dark:text-grayText2">
           Passionate about creative solutions and building apps from scratch, perfecting
           both backend and frontend.
         </p>
-        <p className="text-[#555] dark:text-[#a8a8a8]">
+        <p className="text-grayText1 dark:text-grayText2">
           Currently working as a sole frontend developer,{' '}
           <a
             className="border-b border-black font-medium text-black dark:border-white dark:text-white"
