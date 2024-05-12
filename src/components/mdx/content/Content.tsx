@@ -31,10 +31,7 @@ const customMdxComponents = {
     <PostHeading headingTag="h6" {...props}></PostHeading>
   ),
   img: ({ alt, src }: ImageProps) => <Image src={src} alt={alt ? alt : ''} />,
-  //   Sparkles,
   Image
-  //   Highlight,
-  //   Newsletter,
 }
 
 function Content({ content }: any) {

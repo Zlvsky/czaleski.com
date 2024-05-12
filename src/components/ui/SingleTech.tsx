@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 interface IProps {
   href: string
   name: string
@@ -6,7 +8,7 @@ interface IProps {
 
 const SingleTech = ({ href, name, Icon }: IProps) => {
   return (
-    <a
+    <Link
       href={href}
       target="_blank"
       referrerPolicy="no-referrer"
@@ -14,7 +16,7 @@ const SingleTech = ({ href, name, Icon }: IProps) => {
     >
       <Icon className="mr-1 h-4 w-4" />
       {name}
-    </a>
+    </Link>
   )
 }
 

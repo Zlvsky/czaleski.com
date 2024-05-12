@@ -1,4 +1,5 @@
 import LinkSVG from '@/assets/icons/common/link2.svg'
+import Link from 'next/link'
 
 const links = [
   {
@@ -30,18 +31,18 @@ function Footer() {
     <div className="mx-auto mt-20 flex  max-w-2xl flex-col gap-4 py-10">
       <div className="mt-6 flex flex-row flex-wrap items-center justify-center gap-5 md:mt-0">
         {links.map((link, index) => (
-          <a
-            key={index}
+          <Link
+            key={'footer_link_' + index}
             href={link.link}
             target="_blank"
             rel="noreferrer"
             className="flex flex-row items-center gap-1 text-xs uppercase tracking-tight text-gray7B transition-colors ease-in hover:text-black"
           >
             {link.name} <LinkSVG />
-          </a>
+          </Link>
         ))}
       </div>
-      <span className="text-sm tracking-tight text-gray7B">
+      <span className="text-center text-sm tracking-tight text-gray7B">
         © {year} Krzysztof Zaleski. All Rights Reserved.
       </span>
     </div>

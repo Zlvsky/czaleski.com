@@ -7,8 +7,9 @@ import { Mdx } from '@/components/mdx/Mdx'
 import Content from '@/components/mdx/content/Content'
 import { getMetadata } from '@/lib/metadata'
 import { getWorkBySlug } from '@/lib/posts'
+import { IParamsSlug } from '@/types/generalTypes'
 
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata({ params }: IParamsSlug) {
   const slug = params!.slug as string
   const { frontmatter } = await getWorkBySlug(slug)
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: any) {
   })
 }
 
-async function WorkPage({ params: { slug } }: { params: { slug: string } }) {
+async function WorkPage({ params: { slug } }: IParamsSlug) {
   const { transformedMdx, frontmatter } = await getWorkBySlug(slug)
   return (
     <PageWrap>

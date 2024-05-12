@@ -144,7 +144,6 @@ function Projects() {
   return (
     <>
       <div className="mt-8">
-        {/* <SectionHeader>Projects</SectionHeader> */}
         <div className="flex flex-col gap-16">
           {data.map((el, index) => (
             <SingleProject {...el} key={'project_' + index} />

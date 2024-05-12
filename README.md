@@ -12,19 +12,19 @@ Minimalistic dev portfolio with MDX based Blog, built in Next.js (**app router**
 
 ## Tech used 🛠
 
-| Tech                                                      | Description                                                         |
-| --------------------------------------------------------- | ------------------------------------------------------------------- |
-| [TypeScript](https://www.typescriptlang.org/)             | JavaScript on steroids                                              |
-| [Next.js](https://nextjs.org/)                            | React based framework                                               |
-| [React](https://reactjs.org/)                             | Library for crafting web user interfaces                            |
-| [MDX](https://mdxjs.com/)                                 | Markdown for the component era                                      |
-| [Framer Motion](https://www.framer.com/motion/)           | Motion library for React                                            |
-| [TailwindCSS](https://tailwindcss.com/)                   | Utility-first CSS framework                                         |
-| [next-themes](https://github.com/pacocoursey/next-themes) | Next.js theme detection & switcher                                  |
-| [Vercel analytics](https://vercel.com/analytics)          | Vercel page analytics tool                                          |
-| [Husky](https://github.comtypicode/husky)                 | Git hooks                                                           |
-| [ESLint](https://eslint.org/)                             | TypeScript linting                                                  |
-| [Prettier](https://prettier.io/)                          | Code formatter                                                      |
+| Tech | Description |
+| --- | --- |
+| [TypeScript](https://www.typescriptlang.org/) | JavaScript on steroids |
+| [Next.js](https://nextjs.org/) | React based framework |
+| [React](https://reactjs.org/) | Library for crafting web user interfaces |
+| [MDX](https://mdxjs.com/) | Markdown for the component era |
+| [Framer Motion](https://www.framer.com/motion/) | Motion library for React |
+| [TailwindCSS](https://tailwindcss.com/) | Utility-first CSS framework |
+| [next-themes](https://github.com/pacocoursey/next-themes) | Next.js theme detection & switcher |
+| [Vercel analytics](https://vercel.com/analytics) | Vercel page analytics tool |
+| [Husky](https://github.comtypicode/husky) | Git hooks |
+| [ESLint](https://eslint.org/) | TypeScript linting |
+| [Prettier](https://prettier.io/) | Code formatter |
 
 ## Installation 💿
 

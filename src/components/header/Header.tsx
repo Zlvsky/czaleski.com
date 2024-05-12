@@ -32,7 +32,6 @@ function Header() {
       </div>
 
       <div className="flex flex-row items-center gap-1 sm:gap-3">
-        {/* <NavLinks /> */}
         <Socials />
         <ModeToggle />
       </div>

@@ -27,7 +27,7 @@ const ahrefs = [
 const SingleLink: React.FC<ISingleLink> = ({ href, text }) => {
   if (href.startsWith('http')) {
     return (
-      <a
+      <Link
         href={href}
         className="text-sm text-gray2 dark:text-white/90"
         target="_blank"
@@ -36,7 +36,7 @@ const SingleLink: React.FC<ISingleLink> = ({ href, text }) => {
         <li className="cursor-pointer rounded-md bg-transparent px-1 py-1.5 transition-colors ease-in hover:bg-grayE8/40 dark:hover:bg-dark26 sm:px-2">
           {text}
         </li>
-      </a>
+      </Link>
     )
   }
 

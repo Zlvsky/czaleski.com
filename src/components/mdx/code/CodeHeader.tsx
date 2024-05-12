@@ -26,7 +26,6 @@ export const CodeHeader = memo<CodeHeaderProps>(({ onCopy, isCopied, title, icon
         <span className="visually-hidden">
           {isCopied ? <CheckSvg className="h-4 w-4" /> : <CopySvg className="h-4 w-4" />}
         </span>
-        {/* {isCopied ? <DoneIcon /> : <CopyIcon />} */}
       </button>
     </header>
   )
