@@ -20,7 +20,7 @@ const links = [
   },
   {
     name: 'Resume',
-    link: 'https://drive.google.com/file/d/1qIPu8SZ8ihFguJIER_0vAFMAAvaN6JPJ/view'
+    link: 'https://drive.google.com/file/d/16vH538erKi6kTfgIucXa-Kfw4FnMENVe/view?usp=sharing'
   }
 ]
 
