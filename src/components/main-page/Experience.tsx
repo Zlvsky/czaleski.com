@@ -1,24 +1,13 @@
+import { experience } from '@/data/experience'
 import SectionHeader from '../ui/SectionHeader'
 
-const data = [
-  {
-    role: 'Frontend Developer',
-    company: 'GoodSoft',
-    date: '2022 — Now'
-  },
-  {
-    role: 'Web Developer',
-    company: 'Freelancer',
-    date: '2022 — Now'
-  },
-  {
-    role: 'Web Developer',
-    company: 'Seomi',
-    date: '2021 — 2022'
-  }
-]
+interface SingleExperienceProps {
+  role: string
+  company: string
+  date: string
+}
 
-const SingleExperience = ({ role, company, date }: (typeof data)[0]) => {
+const SingleExperience = ({ role, company, date }: SingleExperienceProps) => {
   return (
     <div className="flex flex-row items-center py-2 text-sm text-grayText1 dark:text-grayText2">
       <span className="w-1/4 text-left">{date}</span>
@@ -33,7 +22,7 @@ function Experience() {
     <div className="mt-8">
       <SectionHeader>Experience</SectionHeader>
       <div className="flex flex-col ">
-        {data.map((el, index) => (
+        {experience.map((el, index) => (
           <SingleExperience {...el} key={'exp_' + index} />
         ))}
       </div>

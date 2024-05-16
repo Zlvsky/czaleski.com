@@ -6,42 +6,8 @@ import MailSvg from '@/assets/icons/common/email.svg'
 import { useCopyString } from '@/hooks/useCopy'
 import { EMAIL } from '@/utils/consts'
 import { useEffect, useRef, useState } from 'react'
-
-const PingDot = () => {
-  return (
-    <span className="relative flex h-2 w-2">
-      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green opacity-60 duration-150"></span>
-      <span className="relative inline-flex h-2 w-2 rounded-full bg-green"></span>
-    </span>
-  )
-}
-
-const LocalTime = () => {
-  const [localTime, setLocalTime] = useState<string>('')
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date()
-      const options = {
-        hour: 'numeric' as const,
-        minute: 'numeric' as const,
-        hour12: true,
-        timeZone: 'Europe/Warsaw'
-      }
-      const formatter = new Intl.DateTimeFormat('en-US', options)
-      const formattedTime = formatter.format(now)
-      setLocalTime(formattedTime)
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <span className="text-sm text-grayText1 dark:text-grayText2">
-      Poland, local time: {localTime}
-    </span>
-  )
-}
+import { LocalTime } from './_components/LocalTime'
+import { PingDot } from './_components/PingDot'
 
 function Contact() {
   const [type, setType] = useState<null | 'email' | 'copy'>(null)

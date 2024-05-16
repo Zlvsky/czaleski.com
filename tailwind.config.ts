@@ -31,7 +31,7 @@ const config: Config = {
         dark48: '#484848',
         grayText1: '#555',
         grayText2: '#a8a8a8',
-        textHover: "#21201c",
+        textHover: '#21201c',
         green: '#2CA56B'
       },
       boxShadow: {
