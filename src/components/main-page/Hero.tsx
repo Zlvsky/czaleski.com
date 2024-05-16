@@ -38,7 +38,7 @@ function Hero() {
         <p className="text-grayText1 dark:text-grayText2">
           Currently working as a sole frontend developer,{' '}
           <a
-            className="border-b border-black font-medium text-black dark:border-white dark:text-white"
+            className="border-b border-grayText1 transition-colors hover:border-textHover hover:text-textHover  dark:border-grayText2 dark:hover:border-white dark:hover:text-white"
             href="https://hireme.czaleski.com"
             target="_blank"
           >

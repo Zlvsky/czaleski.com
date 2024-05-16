@@ -1,64 +1,70 @@
+'use client'
+
+import { routes } from '@/data/routes'
+import { cn } from '@/utils'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 interface ISingleLink {
   href: string
   text: string
+  active: boolean
 }
 
-const ahrefs = [
-  // {
-  //   href: '/about',
-  //   text: 'About'
-  // },
-  {
-    href: 'https://hireme.czaleski.com/',
-    text: 'Hire'
-  },
-  {
-    href: '/blog',
-    text: 'Blog'
-  },
-  {
-    href: 'https://products.czaleski.com/',
-    text: 'Products'
-  }
-]
-
-const SingleLink: React.FC<ISingleLink> = ({ href, text }) => {
-  if (href.startsWith('http')) {
-    return (
-      <Link
-        href={href}
-        className="text-sm text-gray2 dark:text-white/90"
-        target="_blank"
-        referrerPolicy="no-referrer"
-      >
-        <li className="cursor-pointer rounded-md bg-transparent px-1 py-1.5 transition-colors ease-in hover:bg-grayE8/40 dark:hover:bg-dark26 sm:px-2">
-          {text}
-        </li>
-      </Link>
-    )
-  }
+const SingleLink: React.FC<ISingleLink> = ({ href, active, text }) => {
+  const isExternal = href.startsWith('http')
 
   return (
-    <Link href={href} className="text-sm text-gray2 dark:text-white/90">
-      <li className="cursor-pointer rounded-md bg-transparent px-2 py-1.5 transition-colors ease-in hover:bg-grayE8/40 dark:hover:bg-dark26">
-        {text}
-      </li>
-    </Link>
+    <li
+      className={cn(
+        'relative cursor-pointer rounded-md bg-transparent text-sm transition-colors ease-in dark:text-white/90 ',
+        !active && ' hover:text-dark26 dark:hover:text-white'
+      )}
+    >
+      <Link
+        href={href}
+        target={isExternal ? '_blank' : undefined}
+        referrerPolicy={isExternal ? 'no-referrer' : undefined}
+        className="relative z-10 px-2 py-1"
+      >
+        <motion.span
+          initial={{ color: active ? 'white' : 'gray2' }}
+          animate={{ color: active ? 'white' : 'gray2' }}
+          transition={{ type: 'spring', stiffness: 290, damping: 35, duration: 3 }}
+        >
+          {text}
+        </motion.span>
+      </Link>
+      {active ? (
+        <motion.div
+          className={
+            'absolute left-0 right-0 top-0 z-0 -mt-0.5 h-[25px] rounded-md bg-dark26'
+          }
+          layoutId="active"
+          // BUG FIX - PREVENT JUMPING WHEN PAGE IS SCROLLED
+          style={{ originY: '0px' }}
+          transition={{ type: 'spring', stiffness: 290, damping: 35, mass: 1 }}
+        />
+      ) : null}
+    </li>
   )
 }
 
 const NavLinks = () => {
+  const pathname = usePathname()
+
   return (
     <ul className="flex flex-row items-center gap-1 sm:gap-2">
-      <Link href={'/'} className="text-sm text-gray2 dark:text-white/90 sm:hidden">
-        <li className="cursor-pointer rounded-md bg-transparent px-2 py-1.5 transition-colors ease-in hover:bg-grayE8/40 dark:hover:bg-dark26">
-          Home
-        </li>
-      </Link>
-      {ahrefs.map((link, index) => (
-        <SingleLink key={index} {...link} />
+      {routes.map((link, index) => (
+        <SingleLink
+          key={index}
+          active={
+            pathname === link.href ||
+            (pathname.startsWith(link.href) && link.href !== '/')
+          }
+          {...link}
+        />
       ))}
     </ul>
   )

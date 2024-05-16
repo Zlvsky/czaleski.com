@@ -8,6 +8,8 @@ export const DEFAULT_DESCRIPTION =
 export const DEFAULT_IMAGE_URL = '/img/baner.png'
 
 export const EMAIL = 'zlvsky@icloud.com'
+export const NAME = 'Krzysztof Zaleski'
+export const POSITION = 'frontend developer'
 
 export const GITHUB_URL = 'https://github.com/Zlvsky'
 export const TWITTER_URL = 'https://twitter.com/Zlvskyy'
