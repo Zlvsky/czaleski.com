@@ -1,7 +1,7 @@
 import profile from '@/assets/images/profile.png'
 import Image from 'next/image'
 import { memo } from 'react'
-import { SocialIcons } from '../header/_components/Socials'
+import { SocialLinks } from '../ui/SocialLinks'
 
 export const Author = memo(() => {
   return (
@@ -20,7 +20,7 @@ export const Author = memo(() => {
           Web & Frontend developer based in Poland. Passionate about creative solutions
           and building apps from scratch.
         </p>
-        <SocialIcons />
+        <SocialLinks />
       </div>
     </div>
   )

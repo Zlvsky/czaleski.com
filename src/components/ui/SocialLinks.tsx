@@ -1,6 +1,7 @@
 import GithubSVG from '@/assets/icons/social/github.svg'
 import LinkedInSVG from '@/assets/icons/social/linkedin.svg'
 import TwitterSVG from '@/assets/icons/social/twitter.svg'
+import { Button } from '@/components/ui/button/Button'
 import { GITHUB_URL, LINKEDIN_URL, TWITTER_URL } from '@/utils/consts'
 import Link from 'next/link'
 
@@ -19,30 +20,25 @@ const socialsData = [
   }
 ]
 
-export const SocialIcons = () => {
+export const SocialLinks = () => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center ">
       {socialsData.map((el, index) => (
-        <Link
-          href={el.href}
-          target="_blank"
-          rel="noreferrer"
-          className="border-b-0"
+        <Button
           key={'header_social_' + index}
+          variant={'icon'}
+          size={'icon'}
+          className="group"
         >
-          <el.icon width={16} height={16} className="dark:[&>path]:fill-white" />
-        </Link>
+          <Link href={el.href} target="_blank" rel="noreferrer" className="border-b-0">
+            <el.icon
+              width={16}
+              height={16}
+              className="transition-colors dark:[&>path]:fill-white dark:group-hover:[&>path]:fill-black"
+            />
+          </Link>
+        </Button>
       ))}
     </div>
   )
 }
-
-function Socials() {
-  return (
-    <div className="flex w-full items-center justify-between gap-4 md:w-auto md:justify-end">
-      <SocialIcons />
-    </div>
-  )
-}
-
-export default Socials
