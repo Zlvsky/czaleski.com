@@ -1,4 +1,5 @@
 import profile from '@/assets/images/profile.png'
+import { AUTHOR_DESC, NAME } from '@/utils/consts'
 import Image from 'next/image'
 import { memo } from 'react'
 import { SocialLinks } from '../ui/SocialLinks'
@@ -15,11 +16,8 @@ export const Author = memo(() => {
       />
 
       <div className="flex flex-col">
-        <h3 className={'text-lg'}>Written by Krzysztof Zaleski</h3>
-        <p className={'mb-3 text-grayText1 dark:text-grayText2'}>
-          Web & Frontend developer based in Poland. Passionate about creative solutions
-          and building apps from scratch.
-        </p>
+        <h3 className={'text-lg'}>Written by {NAME}</h3>
+        <p className={'mb-3 text-grayText1 dark:text-grayText2'}>{AUTHOR_DESC}</p>
         <SocialLinks />
       </div>
     </div>

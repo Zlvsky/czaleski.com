@@ -1,3 +1,5 @@
+import { GUMROAD_URL } from '@/utils/consts'
+
 export const routes = [
   {
     href: '/',
@@ -12,7 +14,7 @@ export const routes = [
     text: 'Blog'
   },
   {
-    href: 'https://products.czaleski.com/',
+    href: GUMROAD_URL,
     text: 'Products'
   }
 ] as const
